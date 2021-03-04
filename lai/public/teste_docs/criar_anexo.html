@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <title>Criar Anexo</title>
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    </head>
+    <body>
+        <table>
+            <tr><td>anexos_codigo</td><td><input type="text" id="anexos_codigo"></td></tr>
+            <tr><td>anexos_arquivo</td><td><input type="text" id="anexos_arquivo"></td></tr>
+            <tr><td>anexos_conteudo_arquivo</td><td><input type="text" id="anexos_conteudo_arquivo"></td></tr>
+            <tr><td>anexos_criacao</td><td><input type="text" id="anexos_criacao"></td></tr>
+            <tr><td>anexos_alteracao</td><td><input type="text" id="anexos_alteracao"></td></tr> 
+    
+            <tr><td>codigo_pedido</td><td><input type="text" id="pedidos_codigo"></td></tr>
+            <tr><td>usuarios_codigo</td><td><input type="text" id="usuarios_codigo"></td></tr>
+            <tr><td>usuarios_nome</td><td><input type="text" id="usuarios_nome"></td></tr>
+            <tr><td>usuarios_email</td><td><input type="text" id="usuarios_email"></td></tr>
+            <tr><td>agentes_codigo</td><td><input type="text" id="agentes_codigo"></td></tr>
+            <tr><td>agentes_nome</td><td><input type="text" id="agentes_nome"></td></tr>
+            <tr><td>tipo_pedidos_origem_codigo</td><td><input type="text" id="tipo_pedidos_origem_codigo"></td></tr>
+            <tr><td>tipo_pedidos_origem_nome</td><td><input type="text" id="tipo_pedidos_origem_nome"></td></tr>
+            <tr><td>tipo_pedido_situacao_codigo</td><td><input type="text" id="tipo_pedido_situacao_codigo"></td></tr>
+            <tr><td>tipo_pedido_situacao_nome</td><td><input type="text" id="tipo_pedido_situacao_nome"></td></tr>
+            <tr><td>status_pedido_codigo</td><td><input type="text" id="status_pedido_codigo"></td></tr>
+            <tr><td>status_pedido_nome</td><td><input type="text" id="status_pedido_nome"></td></tr>
+            <tr><td>status_pedido_interno_codigo</td><td><input type="text" id="status_pedido_interno_codigo"></td></tr>
+            <tr><td>status_pedido_interno_nome</td><td><input type="text" id="status_pedido_interno_nome"></td></tr>
+            <tr><td>pedidos_protocolo</td><td><input type="text" id="pedidos_protocolo"></td></tr>
+            <tr><td>pedidos_titulo</td><td><input type="text" id="pedidos_titulo"></td></tr>
+            <tr><td>pedidos_slug</td><td><input type="text" id="pedidos_slug"></td></tr>
+            <tr><td>pedidos_descricao</td><td><input type="text" id="pedidos_descricao"></td></tr>
+            <tr><td>pedidos_enviado_para</td><td><input type="text" id="pedidos_enviado_para"></td></tr>
+            <tr><td>pedidos_data_envio</td><td><input type="text" id="pedidos_data_envio"></td></tr>
+            <tr><td>pedidos_foi_prorrogado</td><td><input type="text" id="pedidos_foi_prorrogado"></td></tr>
+            <tr><td>pedidos_anonimo</td><td><input type="text" id="pedidos_anonimo"></td></tr>
+
+            <tr><td>interacoes_codigo</td><td><input type="text" id="interacoes_codigo"></td></tr>
+            <tr><td>tipo_pedidos_resposta_codigo</td><td><input type="text" id="tipo_pedidos_resposta_codigo"></td></tr>
+            <tr><td>tipo_pedidos_resposta_nome</td><td><input type="text" id="tipo_pedidos_resposta_nome"></td></tr>
+            <tr><td>interacoes_descricao</td><td><input type="text" id="interacoes_descricao"></td></tr>
+            <tr><td>interacoes_data_resposta</td><td><input type="text" id="interacoes_data_resposta"></td></tr>
+
+            <tr><td colspan="2"><input type="button" id="btnGravar" value="Criar"></td></tr>
+        </table>
+    </body>
+</html>
+
+<script>
+
+$(function () {
+
+    $(document).ready(function () {
+        $( "#btnGravar" ).click(function() {
+            gravar();
+        });        
+    });
+
+    function gravar() {
+
+        var data = { 
+
+            "pedidos_codigo" :  $('#pedidos_codigo').val(),
+            "usuarios_codigo" :  $('#usuarios_codigo').val(),
+            "usuarios_nome" :  $('#usuarios_nome').val(),
+            "usuarios_email" :  $('#usuarios_email').val(),
+            "agentes_codigo" :  $('#agentes_codigo').val(),
+            "agentes_nome" :  $('#agentes_nome').val(),
+            "tipo_pedidos_origem_codigo" :  $('#tipo_pedidos_origem_codigo').val(),
+            "tipo_pedidos_origem_nome" :  $('#tipo_pedidos_origem_nome').val(),
+            "tipo_pedido_situacao_codigo" :  $('#tipo_pedido_situacao_codigo').val(),
+            "tipo_pedido_situacao_nome" :  $('#tipo_pedido_situacao_nome').val(),
+            "status_pedido_codigo" :  $('#status_pedido_codigo').val(),
+            "status_pedido_nome" :  $('#status_pedido_nome').val(),
+            "status_pedido_interno_codigo" :  $('#status_pedido_interno_codigo').val(),
+            "status_pedido_interno_nome" :  $('#status_pedido_interno_nome').val(),
+            "pedidos_protocolo" :  $('#pedidos_protocolo').val(),
+            "pedidos_titulo" :  $('#pedidos_titulo').val(),
+            "pedidos_slug" :  $('#pedidos_slug').val(),
+            "pedidos_descricao" :  $('#pedidos_descricao').val(),
+            "pedidos_enviado_para" :  $('#pedidos_enviado_para').val(),
+            "pedidos_data_envio" :  $('#pedidos_data_envio').val(),
+            "pedidos_foi_prorrogado" :  $('#pedidos_foi_prorrogado').val(),
+            "pedidos_anonimo" :  $('#pedidos_anonimo').val(),
+
+            "interacoes_codigo" :  $('#interacoes_codigo').val(),
+            "tipo_pedidos_resposta_codigo" :  $('#tipo_pedidos_resposta_codigo').val(),
+            "tipo_pedidos_resposta_nome" :  $('#tipo_pedidos_resposta_nome').val(),
+            "interacoes_descricao" :  $('#interacoes_descricao').val(),
+            "interacoes_data_resposta" :  $('#interacoes_data_resposta').val(),
+            
+            "anexos_codigo" :  $('#anexos_codigo').val(),
+            "anexos_arquivo" :  $('#anexos_arquivo').val(),
+            "anexos_conteudo_arquivo" :  $('#anexos_conteudo_arquivo').val(),
+            "anexos_criacao" :  $('#anexos_criacao').val(),
+            "anexos_alteracao" :  $('#anexos_alteracao').val()
+
+        };
+
+        var urlApi = '/api/anexos/criar/' + $('#anexos_codigo').val();
+
+        $.ajax(urlApi, {
+            method: "PUT",
+            data: data,
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: "json",
+            success: function (result) {
+                alert("Anexo criado");
+            },
+            error: function (err) {
+                alert("Erro");
+            }
+        });
+    }
+
+});
+
+</script>

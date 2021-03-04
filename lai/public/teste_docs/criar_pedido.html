@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <title>Criar Pedido</title>
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    </head>
+    <body>
+        <table>
+            <tr><td>codigo_pedido</td><td><input type="text" id="codigo_pedido"></td></tr>
+            <tr><td>agentes_codigo_local</td><td><input type="text" id="agentes_codigo_local"></td></tr>
+            <tr><td>agentes_nome_local</td><td><input type="text" id="agentes_nome_local"></td></tr>
+            <tr><td>usuarios_codigo_local</td><td><input type="text" id="usuarios_codigo_local"></td></tr>
+            <tr><td>usuarios_email_local</td><td><input type="text" id="usuarios_email_local"></td></tr>
+            <tr><td>usuarios_nome_local</td><td><input type="text" id="usuarios_nome_local"></td></tr>
+            <tr><td>status_pedido_codigo_local</td><td><input type="text" id="status_pedido_codigo_local"></td></tr>
+            <tr><td>status_pedido_interno_codigo_local</td><td><input type="text" id="status_pedido_interno_codigo_local"></td></tr>
+            <tr><td>status_pedido_interno_nome_local</td><td><input type="text" id="status_pedido_interno_nome_local"></td></tr>
+            <tr><td>status_pedido_nome_local</td><td><input type="text" id="status_pedido_nome_local"></td></tr>
+            <tr><td>tipo_pedido_situacao_codigo_local</td><td><input type="text" id="tipo_pedido_situacao_codigo_local"></td></tr>
+            <tr><td>tipo_pedido_situacao_nome_local</td><td><input type="text" id="tipo_pedido_situacao_nome_local"></td></tr>
+            <tr><td>tipo_pedidos_origem_codigo_local</td><td><input type="text" id="tipo_pedidos_origem_codigo_local"></td></tr>
+            <tr><td>tipo_pedidos_origem_nome_local</td><td><input type="text" id="tipo_pedidos_origem_nome_local"></td></tr>
+            <tr><td>pedidos_protocolo_local</td><td><input type="text" id="pedidos_protocolo_local"></td></tr>
+            <tr><td>pedidos_titulo_local</td><td><input type="text" id="pedidos_titulo_local"></td></tr>
+            <tr><td>pedidos_slug_local</td><td><input type="text" id="pedidos_slug_local"></td></tr>
+            <tr><td>pedidos_descricao_local</td><td><input type="text" id="pedidos_descricao_local"></td></tr>
+            <tr><td>pedidos_foi_prorrogado_local</td><td><input type="text" id="pedidos_foi_prorrogado_local"></td></tr>
+            <tr><td>pedidos_anonimo_local</td><td><input type="text" id="pedidos_anonimo_local"></td></tr>
+            <tr><td>pedidos_data_envio_local</td><td><input type="text" id="pedidos_data_envio_local"></td></tr>
+            <tr><td>pedidos_enviado_para_local</td><td><input type="text" id="pedidos_enviado_para_local"></td></tr>
+            <tr><td>pedidos_criacao</td><td><input type="text" id="pedidos_criacao"></td></tr>
+            <tr><td>pedidos_alteracao</td><td><input type="text" id="pedidos_alteracao"></td></tr>
+            <tr><td colspan="2"><input type="button" id="btnCriar" value="Criar"> </td></tr>
+        </table>
+    </body>
+</html>
+
+<script>
+
+$(function () {
+
+    $(document).ready(function () {
+        $( "#btnCriar" ).click(function() {
+            criar();
+        });        
+    });
+
+    function criar() {
+
+        var data = { 
+            "agentes_codigo_local" :  $('#agentes_codigo_local').val(),
+            "agentes_nome_local" :  $('#agentes_nome_local').val(),
+            "usuarios_codigo_local" :  $('#usuarios_codigo_local').val(),
+            "usuarios_email_local" :  $('#usuarios_email_local').val(),
+            "usuarios_nome_local" :  $('#usuarios_nome_local').val(),
+            "status_pedido_codigo_local" :  $('#status_pedido_codigo_local').val(),
+            "status_pedido_interno_codigo_local" :  $('#status_pedido_interno_codigo_local').val(),
+            "status_pedido_interno_nome_local" :  $('#status_pedido_interno_nome_local').val(),
+            "status_pedido_nome_local" :  $('#status_pedido_nome_local').val(),
+            "tipo_pedido_situacao_codigo_local" :  $('#tipo_pedido_situacao_codigo_local').val(),
+            "tipo_pedido_situacao_nome_local" :  $('#tipo_pedido_situacao_nome_local').val(),
+            "tipo_pedidos_origem_codigo_local" :  $('#tipo_pedidos_origem_codigo_local').val(),
+            "tipo_pedidos_origem_nome_local" :  $('#tipo_pedidos_origem_nome_local').val(),
+            "pedidos_protocolo_local" :  $('#pedidos_protocolo_local').val(),
+            "pedidos_titulo_local" :  $('#pedidos_titulo_local').val(),
+            "pedidos_slug_local" :  $('#pedidos_slug_local').val(),
+            "pedidos_descricao_local" :  $('#pedidos_descricao_local').val(),
+            "pedidos_foi_prorrogado_local" :  $('#pedidos_foi_prorrogado_local').val(),
+            "pedidos_anonimo_local" :  $('#pedidos_anonimo_local').val(),
+            "pedidos_data_envio_local" :  $('#pedidos_data_envio_local').val(),
+            "pedidos_enviado_para_local" :  $('#pedidos_enviado_para_local').val(),
+            "pedidos_criacao" :  $('#pedidos_criacao').val(),
+            "pedidos_alteracao" :  $('#pedidos_alteracao').val()
+        };
+
+        var urlApi = 'http://localhost:8080/api/pedidos/criar/' + $('#codigo_pedido').val();
+
+        $.ajax(urlApi, {
+            method: "PUT",
+            data: data,
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: "json",
+            success: function (result) {
+                alert("Pedido criado");
+            },
+            error: function (err) {
+                alert("Erro");
+            }
+        });
+    }
+
+});
+
+</script>

@@ -1,0 +1,408 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+
+        <!-- Description -->
+        <title>Portal LAI - Achados e Pedidos</title>
+        <meta name="description" content="">
+
+        <!-- Viewport -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+        <!-- Favicon -->
+        <link rel="icon" href="assets/images/favicon-16x16.png" sizes="16x16">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="assets/css/public.css">
+    </head>
+    <body>
+      <div class="wrapper">
+       <header>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-sm-12 col-xs-12 logosHeader">
+                <a href="http://www.abraji.org.br/" target="_blank">
+                  <img src="assets/images/home/logo-abraji.png" alt="Abraji" class="img-first">
+                </a>
+                <a href="http://www.transparencia.org.br/" target="_blank">
+                  <img src="assets/images/home/logo-tranparencia.png" alt="Tranparência Brasil" class="img-last hidden-xs">
+                  <img src="assets/images/home/logo-tranparencia-mobile.png" alt="Tranparência Brasil" class="img-last visible-xs">
+                </a>
+              </div>
+              <div class="col-md-4 col-sm-12 col-xs-12">
+                <ul class="nav navbar-nav navbar-letf loginDesk">
+                  <li class="btnLogin"><a href="login.php">Entrar</a></li>
+                  <li class="btnInserirPedido"><a href="inserir-pedidos.php">Inserir Pedido</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <nav class="navbar navbar-default">
+            <div class="container">
+              <div class="row">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="index.php"><img src="assets/images/home/logo-projeto.png" alt="logo"></a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav navBar-bottom">
+                    <li class="dropdownMenu">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b> Sobre </a>
+                      <ul class="dropdown-menu2">
+                        <li><a href="institucional.php">Institucional</a></li>
+                        <li><a href="duvidas-frequentes.php">Dúvidas</a></li>
+                        <li><a href="na-midia.php">Na Mídia</a></li>
+                        <li><a href="contato.php">Contato</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="pedidos.php">Pedidos</a></li>
+                    <li><a href="publicacoes.php">Publicações</a></li>
+                    <li><a href="cursos.php" class="menuLast">Cursos</a></li>
+                    <li class="loginMobile"><a href="login.php">Entrar</a></li>
+                    <li class="loginMobile"><a href="inserir-pedidos.php">Cadastrar-se</a></li>
+                    <form class="navbar-form navbar-right" role="search" action="resultado-de-busca.php">
+                      <div id="custom-search-input">
+                          <div class="input-group col-md-12">
+                              <input type="text" class="form-control input-lg" placeholder="Digite aqui sua busca" />
+                              <span class="input-group-btn">
+                                  <button class="btn btn-info btn-lg" type="button">
+                                      <i class="glyphicon glyphicon-search"></i>
+                                  </button>
+                              </span>
+                          </div>
+                      </div>
+                    </form>
+                  </ul>
+                </div>
+              </div>
+              <!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+          </nav>
+        </header>
+
+<div class="container">
+  <div class="row">
+    <ul class="breadcrumb">
+      <li class="completed">Home</li>
+      <li class="active"><a href="#">Orgãos Públicos</a></li>
+      <li class="active"><a href="#">Detalhes Orgãos Públicos</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="container pedidosOrgaos">
+    <div class="row">
+      <div class="col-md-12 busca">
+        <form>
+          <h2>Pedidos</h2>
+          <div id="custom-search-input">
+              <div class="input-group col-md-12">
+                
+                  <input list="fieldList" name="fieldValue" id="fieldValue" class="form-control input-lg" placeholder="Digite aqui sua busca">
+                  <datalist id="fieldList">
+                  </datalist>
+
+                  <span class="input-group-btn">
+                      <button class="btn btn-info btn-lg" type="button" id="btnsearch">
+                          <i class="glyphicon glyphicon-search"></i>
+                      </button>
+                  </span>
+              </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 filtro">
+        <h1>Filtrar por:</h1>
+         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+            <div class="panel panel-default">
+                <div class="panel-heading data" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="more-less glyphicon glyphicon-chevron-down"></i>
+                            Data:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                      <form action="" method="post" data-parsley-validate data-parsley-errors-messages-disabled>
+                       <div class="col-md-6">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="data-de" required>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="data-ate" required>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                              <input type="submit" class="form-control" value="selecionar">
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                </div>
+              </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <i class="more-less glyphicon glyphicon-chevron-down"></i>
+                            Situação do pedido
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                       <form action="" method="post" data-parsley-validate data-parsley-errors-messages-disabled>
+                         <div class="form-group bgCheckbox">
+                            <input type="checkbox" id="chkEmTramitacao" class="regular-checkbox">
+                            <label for="chkEmTramitacao">Em tramitação </label>
+                          </div>
+                          <div class="form-group bgCheckbox">
+                            <input type="checkbox" id="chkFinalizada" class="regular-checkbox">
+                            <label for="chkFinalizada">Finalizada</label>
+                          </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <i class="more-less glyphicon glyphicon-chevron-down"></i>
+                            Pedidos com recurso
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        <form action="" method="post" id="frmPR" name="frmPR" data-parsley-validate data-parsley-errors-messages-disabled>
+                          <label class="radio-inline">
+                            <input type="radio" name="pedidosRecurso" id="pedidosRecursoSim">Sim
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="pedidosRecurso" id="pedidosRecursoNao">Não
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="pedidosRecurso" id="pedidosRecursoTodos">Todos
+                          </label>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingFour">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <i class="more-less glyphicon glyphicon-chevron-down"></i>
+                            Respostas do órgão público:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                    <div class="panel-body">
+                        <form action="" method="post" data-parsley-validate data-parsley-errors-messages-disabled>
+                         <div class="form-group bgCheckbox">
+                            <input type="checkbox" id="chkAtendido" class="regular-checkbox">
+                            <label for="chkAtendido">Atendido</label>
+                          </div>
+                          <div class="form-group bgCheckbox">
+                            <input type="checkbox" id="chkNaoAtendido" class="regular-checkbox">
+                            <label for="chkNaoAtendido">Não atendido</label>
+                          </div>
+                          <div class="form-group bgCheckbox">
+                            <input type="checkbox" id="chkParcAtendido" class="regular-checkbox">
+                            <label for="chkParcAtendido">Parcialmente atendido</label>
+                          </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingFive">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <i class="more-less glyphicon glyphicon-chevron-down"></i>
+                            Órgãos públicos
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapsse" role="tabpanel" aria-labelledby="headingFive">
+                    <div class="panel-body">
+                      <form action="" method="post" data-parsley-validate data-parsley-errors-messages-disabled>
+                         <h5>Nível:</h5>
+                         <div class="form-group bgCheckbox">
+                            <input type="checkbox" id="chkFederal" class="regular-checkbox">
+                            <label for="chkFederal">Federal</label>
+                          </div>
+                          <div class="form-group bgCheckbox">
+                            <input type="checkbox" id="chkEstadual" class="regular-checkbox">
+                            <label for="chkEstadual">Estadual</label>
+                          </div>
+                          <div class="form-group bgCheckbox">
+                            <input type="checkbox" id="chkMunicipal" class="regular-checkbox">
+                            <label for="chkMunicipal">Municipal</label>
+                          </div>
+                          <h5>Poder:</h5>
+                          <div class="form-group bgCheckbox">
+                            <input type="checkbox" id="chkLegislativo" class="regular-checkbox">
+                            <label for="chkLegislativo">Legislativo e Tribunais de Contas</label>
+                          </div>
+                          <div style="clear:both;">
+                          </div>
+                          <div class="form-group bgCheckbox">
+                            <input type="checkbox" id="chkExecutivo" class="regular-checkbox">
+                            <label for="chkExecutivo">Executivo</label>
+                          </div>
+                          <div class="form-group bgCheckbox">
+                            <input type="checkbox" id="chkJudiciario" class="regular-checkbox">
+                            <label for="chkJudiciario">Judiciário</label>
+                          </div>
+                          <div class="form-group bgCheckbox">
+                            <input type="checkbox" id="chkMinisterio" class="regular-checkbox">
+                            <label for="chkMinisterio">Ministério Público</label>
+                          </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                      <input type="reset" class="form-control" value="Limpar">
+                  </div>
+                </div>
+            </div>
+
+        </div><!-- panel-group -->
+      </div>
+      <div class="col-md-9">
+        <h1>Foram encontrados <span id="hits-total-display"></span> pedidos.</h1>
+        <h2>Mostrando <span id="paginacao-de"></span> de <span id="paginacao-ate"></span>.</h2>
+        <div class="row" id="boxes-resultados">
+
+
+
+
+        </div>
+         <div class="text-center">
+          <ul class="pagination pagination-large" id="ulPagination"> 
+        </ul>
+        </div>
+      </div>
+    </div>
+</div>
+
+    <footer>
+      <div class="container-fluid bgFooter">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <img src="assets/images/footer/logo-projeto.png" alt="Logo"/>
+            </div>
+            <div class="col-md-5 col-sm-6 col-xs-12">
+              <h2>Sobre</h2>
+              <ul>
+                <div class="col-md-4 col-sm-6 col-xs-6">
+                  <li><a href="#">Institucional</a></li>
+                  <li><a href="#">Dúvidas</a></li>
+                  <li><a href="#">Na Mídia</a></li>
+                  <li><a href="#">Contato</a></li>
+                </div>
+                <div class="col-md-5 col-sm-6 col-xs-6">
+                  <li><a href="#">Publicações</a></li>
+                  <li><a href="#">Pedidos</a></li>
+                  <li><a href="#">Dados</a></li>
+                  <li><a href="#">Cursos</a></li>
+                </div>
+              </ul>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12 pull-right">
+              <div class="redesSociais">
+                <a href="#" target="_blank"><img src="assets/images/footer/twitter.jpg" alt="Twitter"/></a>
+                <a href="#" target="_blank"><img src="assets/images/footer/facebook.jpg" alt="Facebook"/></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+       
+        <div class="row last">
+          <div class="col-md-1 col-sm-12 col-xs-12 no-gutter-left">
+            <img src="assets/images/footer/logo-creative.jpg" alt="creative" class="ImgCreative"/>
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="politica">
+            <p>
+              Todo o nosso conteúdo pode ser publicado ou reutilizados de forma gratuita, exceto para a maioria das fotografias, ilustrações e vídeos.</p>
+              <a href="politica-de-uso.php"><strong>Política de Uso</strong></a><span>e</span>  <a href="termos-de-privacidade.php"><strong>Termos de Privacidade</strong></a>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-12 col-xs-12 copyright no-gutter-right">
+            <p>2016 © Achados e Pedidos.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- line modal -->
+    <div class="modal-warning modal fade" id="modalnaologado" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">
+              <img src="assets/images/cursos/fechar.png" alt="Fechar"></span>
+              <span class="sr-only">Close</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- content goes here -->
+            <div class="box">
+              <img src="assets/images/geral/warning.png" alt="Espere!">
+              <p class="warning-title">Esta ação requer login</p>
+              <p>Você precisa se logar no site para fazer essa ação.</p>
+              <div class="col-sm-12">
+                <div class="bntVerMais"><a href="login.php">Fazer login</a></div>
+              </div>
+              <a href="cadastro.php">Não tenho login, quero me cadastrar.</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--// line modal -->
+
+    <!-- Deferred JavaScript -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="assets/js/public.js"></script>
+    <script type="text/javascript" src="assets/js/wow/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+    <script src="assets/js/bootstrap-filestyle.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="assets/js/pedidos.js"></script>
+  </body>
+</html>

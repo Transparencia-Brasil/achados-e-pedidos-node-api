@@ -1,0 +1,317 @@
+//search as u type com paginacao
+GET /pedidos3/data/_search?filter_path=hits.hits._source
+{
+  "from" : 0, "size" : 30,
+  "_source": "Pedidos_Agentes_Nome",
+    "query": {
+        "match_phrase_prefix" : {
+            "Pedidos_Agentes_Nome" : "Nome AgenteN"
+        }
+    }
+}
+
+
+
+POST _analyze
+{
+  "tokenizer": "standard",
+  "filter":  [ "lowercase", "asciifolding" ],
+  "text":      "SituaçãoSunt"
+}
+
+
+GET /pedidos3/data/_search?filter_path=hits.hits._source
+{
+  "from" : 0, "size" : 30,
+  "_source": "Pedidos_Agentes_Nome",
+    "query": {
+        "match_phrase_prefix" : {
+            "Pedidos_Agentes_Nome" : "Nome AgenteN"
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+GET /pf/full/_search?q=nome:fabricio beltran?explain
+
+
+POST /interacoes/data/_search
+{
+  "size": 0,
+  "query" :{
+    "terms" : {
+        "Pedidos_Codigo" : [10, 20]
+    }
+  },
+    "aggs": {
+        "group": {
+            "terms": {
+                "field": "Pedidos_Codigo"
+            },
+            "aggs": {
+                "group_docs": {
+                    "top_hits": {
+                        "size": 1,
+                        "sort": [
+                            {
+                                "Codigo": {
+                                    "order": "desc"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}
+
+GET /_search
+{
+    "from" : 0, "size" : 9,
+    "query" : {
+        "bool" : {
+      "should" : [
+        { "match": { "Descricao" : "cidade" } },
+        { "match": { "Titulo" : "cidade" } },
+        { "match": { "Arquivo" : "cidade" } },
+        { "match": { "ConteudoArquivo" : "cidade" } },
+        { "match": { "TipoPedidosResposta_Nome" : "cidade" } }
+      ]}
+    },
+    "highlight" : {
+        "fields" : {
+            "Descricao" : {},
+            "Titulo" : {},
+            "TipoPedidosResposta_Nome" : {},
+            "Arquivo" : {},
+            "ConteudoArquivo": {}
+        }
+    }
+}
+
+GET /_search
+{
+    "from" : 0, "size" : 9,
+    "query" : {
+        "bool" : {
+      "should" : [
+        { "match": { "Descricao" : "cidade" } },
+        { "match": { "Titulo" : "cidade" } },
+        { "match": { "Arquivo" : "cidade" } },
+        { "match": { "ConteudoArquivo" : "cidade" } },
+        { "match": { "TipoPedidosResposta_Nome" : "cidade" } }
+      ],
+       "must": [
+          { "range": { "DataEnvio" : { "gte" : "2016-10-10" }}},
+          { "range": { "DataEnvio" : { "lt" : "2016-11-17" }}}
+        ]
+      }
+    },
+    "highlight" : {
+        "fields" : {
+            "Descricao" : {},
+            "Titulo" : {},
+            "TipoPedidosResposta_Nome" : {},
+            "Arquivo" : {},
+            "ConteudoArquivo": {}
+        }
+    }
+}
+
+GET /_search
+{
+    "query" : {
+        "match": { "Descricao" : "descricao" }
+    },
+    "highlight" : {
+        "fields" : {
+            "TipoPedidosResposta_Nome" : {},
+            "Descricao": {}
+        }
+    }
+}
+
+GET /_search?filter_path=hits.hits._source
+{
+  "from" : 0, "size" : 3,
+  "_source": "Titulo",
+    "query": {
+        "match_phrase_prefix" : {
+            "Titulo" : "acentuacao"
+        }
+    }
+}
+
+GET /pedidos/data/_search?filter_path=hits.hits._source
+{
+  "from" : 0, "size" : 3,
+  "_source": [ "Descricao", "Titulo" ],
+  "query": {
+  "multi_match" : {
+    "query":      "Acentuação",
+    "type":       "phrase_prefix",
+    "fields":     [ "Titulo", "Descricao" ]
+  }
+  }
+}
+
+GET /pedidos/data/_search?filter_path=hits.hits._source
+{
+  "from" : 0, "size" : 3,
+  "_source": [ "Descricao", "Titulo" ],
+  "query": {
+  "dis_max": {
+    "queries": [
+      { "match_phrase_prefix": { "Titulo": "Acentuação" }},
+      { "match_phrase_prefix": { "Descricao": "Acentuação" }}
+    ]
+  }
+}
+}
+
+
+
+GET /pf/full/_search
+{
+  "from" : 0, "size" : 3,
+  "_source": [ "nome" ],
+  "query": {
+  "dis_max": {
+    "queries": [
+      { "match_phrase_prefix": { "nome": "fabricio jose" }}
+      
+    ]
+  }
+}
+}
+
+
+DELETE /pedidos/
+DELETE /interacoes/
+DELETE /anexos/
+
+PUT /pedidos/
+{  
+   "index":{  
+      "analysis":{  
+         "analyzer":{  
+            "index_analyzer":{  
+               "filter":[  
+                  "standard",
+                  "lowercase",
+                  "asciifolding"
+               ],
+               "tokenizer":"standard"
+            },
+            "search_analyzer":{  
+               "filter":[  
+                  "standard",
+                  "lowercase",
+                  "asciifolding"
+               ],
+               "tokenizer":"standard"
+            },
+            "sortable":{  
+               "filter":"lowercaseFilter",
+               "tokenizer":"keyword",
+               "type":"custom"
+            }
+         },
+         "filter":{  
+            "lowercaseFilter":{  
+               "type":"lowercase"
+            }
+         },
+         "tokenizer":{  
+            "keyword":{  
+               "type":"keyword"
+            }
+         }
+      }
+   }
+}
+
+
+
+PUT /pedidos/_mapping/data
+{
+    "properties": {
+        "Codigo": { "type": "integer" },
+        
+        "Usuarios_Codigo": { "type": "integer" },
+            "Usuarios_Nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+            "Usuarios_Email": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        
+        "Agentes_Codigo": { "type": "integer" },
+            "Agentes_Nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        
+        "TipoPedidosOrigem_Codigo": { "type": "integer" },
+            "TipoPedidosOrigem_Nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+
+        "TipoPedidoSituacao_Codigo": { "type": "integer" },
+            "TipoPedidoSituacao_Nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+
+        "StatusPedido_Codigo": { "type": "integer" },
+            "StatusPedido_Nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+
+        "StatusPedidoInterno_Codigo": { "type": "integer" },
+            "StatusPedidoInterno_Nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+
+        "Protocolo": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "Titulo": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "Slug": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "Descricao": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "DataEnvio": { "type":   "date", "format": "yyyy-MM-dd" },
+        "FoiProrrogado": { "type": "boolean" },
+        "Anonimo": { "type": "boolean" },
+        "Criacao": { "type":   "date", "format": "yyyy-MM-dd" },
+        "Alteracao": { "type":   "date", "format": "yyyy-MM-dd" }
+        
+    }
+}
+
+
+
+
+
+
+PUT /interacoes/_mapping/data
+{
+    "properties": {
+
+        "Pedidos_Codigo": { "type": "integer" },
+        "Codigo": { "type": "integer" },
+        "TipoPedidosResposta_Codigo": { "type": "integer" },
+            "TipoPedidosResposta_Nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "Descricao": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "Criacao": { "type":   "date", "format": "yyyy-MM-dd" },
+        "Alteracao": { "type":   "date", "format": "yyyy-MM-dd" }
+
+    }
+}
+
+
+PUT /anexos/_mapping/data
+{
+    "properties": {
+
+        "Pedidos_Codigo": { "type": "integer" },
+        "Interacoes_Codigo": { "type": "integer" },
+
+        "Codigo": { "type": "integer" },
+        "Arquivo": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "ConteudoArquivo": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "Criacao": { "type":   "date", "format": "yyyy-MM-dd" },
+        "Alteracao": { "type":   "date", "format": "yyyy-MM-dd" }
+
+    }
+}

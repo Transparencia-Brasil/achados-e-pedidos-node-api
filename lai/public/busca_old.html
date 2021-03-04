@@ -1,0 +1,960 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+
+        <!-- Description -->
+        <title>Portal LAI - Achados e Pedidos</title>
+        <meta name="description" content="">
+
+        <!-- Viewport -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+        <!-- Favicon -->
+        <link rel="icon" href="assets/images/favicon-16x16.png" sizes="16x16">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="assets/css/public.css">
+        <style type="text/css">
+          em { 
+              background-color: yellow;
+          }
+        </style>
+    </head>
+    <body>
+      <div class="wrapper">
+       <header>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-sm-12 col-xs-12 logosHeader">
+                <a href="http://www.abraji.org.br/" target="_blank">
+                  <img src="assets/images/home/logo-abraji.png" alt="Abraji" class="img-first">
+                </a>
+                <a href="http://www.transparencia.org.br/" target="_blank">
+                  <img src="assets/images/home/logo-tranparencia.png" alt="Tranparência Brasil" class="img-last">
+                </a>
+              </div>
+              <div class="col-md-4 col-sm-12 col-xs-12">
+                <ul class="nav navbar-nav navbar-letf loginDesk">
+                  <li class="btnLogin"><a href="login.php">Entrar</a></li>
+                  <li class="btnInserirPedido"><a href="inserir-pedidos.php">Inserir Pedido</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <nav class="navbar navbar-default">
+            <div class="container">
+              <div class="row">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="index.php"><img src="assets/images/home/logo-projeto.png" alt="logo"></a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav navBar-bottom">
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b> Sobre </a>
+                      <ul class="dropdown-menu">
+                        <li><a href="institucional.php">Institucional</a></li>
+                        <li><a href="duvidas-frequentes.php">Dúvidas</a></li>
+                        <li><a href="na-midia.php">Na Mídia</a></li>
+                        <li><a href="contato.php">Contato</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="pedidos.php">Pedidos</a></li>
+                    <li><a href="publicacoes.php">Publicações</a></li>
+                    <li><a href="cursos.php" class="menuLast">Cursos</a></li>
+                    <li class="loginMobile"><a href="login.php">Entrar</a></li>
+                    <li class="loginMobile"><a href="inserir-pedidos.php">Cadastrar-se</a></li>
+                    <form class="navbar-form navbar-right" role="search" action="resultado-de-busca.php">
+                      <div id="custom-search-input">
+                          <div class="input-group col-md-12">
+                              <input type="text" class="form-control input-lg" id="fieldValueBar" placeholder="Digite aqui sua busca" />
+                              <span class="input-group-btn">
+                                  <button id="btnsearchbar" class="btn btn-info btn-lg" type="button">
+                                      <i class="glyphicon glyphicon-search"></i>
+                                  </button>
+                              </span>
+                          </div>
+                      </div>
+                    </form>
+                  </ul>
+                </div>
+              </div>
+              <!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+          </nav>
+        </header>
+
+<div class="container">
+  <div class="row">
+    <ul class="breadcrumb">
+      <li class="completed">Home</li>
+      <li class="active"><a href="#">Busca</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="busca">
+
+  <!--Pedidos-->
+  <div class="container">
+      <section class="buscaForm">
+        <div class="row">
+        <div class="col-md-1"></div>
+          <div class="col-md-4">
+           <h4>Resultado para: "<span id="lblresult"></span>"</h4>
+           <form role="search" action="">
+            <div id="custom-search-input">
+                <div class="input-group col-md-12">
+                    <input type="text" id="fieldValue" class="form-control input-lg" placeholder="Digite aqui sua busca" value="descricao">
+                    <span class="input-group-btn">
+                        <button id="btnsearch" class="btn btn-info btn-lg" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+          </form>
+          </div>
+          <div class="col-md-4"></div>
+          </div>
+
+          <div class="row bnts">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+              <div class="bntVerMais selected" repo="pedidos">
+                <a href="#">Pedidos</a>
+              </div>
+            </div>
+             <div class="col-md-2">
+              <div class="bntVerMais" repo="orgaospublicos">
+                <a href="#">Órgãos Públicos</a>
+              </div>
+            </div>
+             <div class="col-md-2">
+              <div class="bntVerMais" repo="publicacoes">
+                <a href="#">Públicações</a>
+              </div>
+            </div>
+             <div class="col-md-2">
+              <div class="bntVerMais" repo="usuarios">
+                <a href="#">Usuários</a>
+              </div>
+            </div>
+             <div class="col-md-2">
+              <div class="bntVerMais" repo="cursos">
+                <a href="#">Cursos</a>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+      </section>
+  </div>
+
+  <!--Pedidos-->
+  <div class="container-fluid bgColor show" session="pedidos">
+    <div class="container">
+      <section class="pedidos">
+         <h3>Pedidos:</h3>
+        <div class="row" id="searchResults">
+
+          <div class="col-md-12" style="background-color: white">
+
+            <div class="row">
+              <div class="col-md-8">
+                  <p>aaLorem ispum dolor sit amet lorem isoum dolor sit ispum dolor sit amet lorem iso  aaLorem ispum dolor sit amet lorem isoum dolor sit ispum dolor sit amet lorem iso
+                  </p>
+
+                    <div class="enviado">Enviado para: <a href="#">Controladoria Geral da União</a></div>
+                    <div class="por">Por: <a href="#">Nome do Usuário</a></div>
+                    <div class="em">Em: 05/08/2016</div>
+                    <div class="situaca">
+                      <img src="assets/images/home/icon-tramitacao.jpg" alt="Finalizado">
+                      <p>Situação: <strong>Em tramitação</strong></p>
+                    </div>
+                    <br>
+                    <div class="bntVerMais ">
+                      <a href="#">Ver </a>
+                    </div>
+              </div>
+
+               <div class="col-md-4">
+                 TEXTO EM HIGHLIGHT. Oriundo do conteudo do arquivo ou provavelmente descrição de pedido.' 
+               </div>
+          </div>
+
+
+
+          
+
+
+        </div>
+      </div>
+      </section>
+    </div>
+  </div>
+  <!--Órgãos Públicos:-->
+  <div class="container-fluid bgColor hidden" session="orgaospublicos">
+    <div class="container">
+      <section class="orgaosP">
+        <h3>Órgãos Públicos:</h3>
+        <div class="row">
+            <div class="col-md-3 cartao">
+              <h4>
+                <strong>Lorem ispum dolor sit amet lorem ispum dolor it amet lorem ipsum.</strong>
+              </h4>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id rhoncus nunc, sed euismod nulla. Sed gravida turpis ut sagittis pharetra. Cras varius pretium quam. 
+              </p>
+              <div class="bntVerMais pull-right">
+                <a href="#">Ver <div class="seta seta-direita"></div></a>
+              </div>
+            </div>
+
+            <div class="col-md-3 cartao">
+              <h4>
+                <strong>Lorem ispum dolor sit amet lorem ispum dolor it amet lorem ipsum.</strong>
+              </h4>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id rhoncus nunc, sed euismod nulla. Sed gravida turpis ut sagittis pharetra. Cras varius pretium quam. 
+              </p>
+              <div class="bntVerMais pull-right">
+                <a href="#">Ver <div class="seta seta-direita"></div></a>
+              </div>
+            </div>
+
+            <div class="col-md-3 cartao">
+              <h4>
+                <strong>Lorem ispum dolor sit amet lorem ispum dolor it amet lorem ipsum.</strong>
+              </h4>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id rhoncus nunc, sed euismod nulla. Sed gravida turpis ut sagittis pharetra. Cras varius pretium quam. 
+              </p>
+              <div class="bntVerMais pull-right">
+                <a href="#">Ver <div class="seta seta-direita"></div></a>
+              </div>
+            </div>
+
+            <div class="col-md-3 cartao">
+              <h4>
+                <strong>Lorem ispum dolor sit amet lorem ispum dolor it amet lorem ipsum.</strong>
+              </h4>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id rhoncus nunc, sed euismod nulla. Sed gravida turpis ut sagittis pharetra. Cras varius pretium quam. 
+              </p>
+              <div class="bntVerMais pull-right">
+                <a href="#">Ver <div class="seta seta-direita"></div></a>
+              </div>
+            </div>
+          </div>
+      </section>
+    </div>
+</div>
+
+
+  <!--Publicacoes-->
+  <div class="container-fluid bgColor hidden" session="publicacoes">
+    <div class="container">
+      <section class="publicacoes">
+        <div class="row">
+          <h3>Publicações</h3>
+          <div class="row">
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="boxPu">
+              <div class="categoria">
+                Nome da categoria
+              </div>
+              <div class="publicado">
+                Publicado em 20/06/2016
+              </div>
+              <h2>Lorem ispum dolor sit amet dolor sit lorem ispum sit.</h2>
+              <p>Lorem ispum dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit dolor.</p>
+              <div class="download">
+                <a href="#">
+                  <img src="assets/images/publicacoes/download.png" alt="Download">
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="boxPu">
+              <div class="categoria">
+                Nome da categoria
+              </div>
+              <div class="publicado">
+                Publicado em 20/06/2016
+              </div>
+              <h2>Lorem ispum dolor sit amet dolor sit lorem ispum sit.</h2>
+              <p>Lorem ispum dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit dolor.</p>
+              <div class="download">
+                <a href="#">
+                  <img src="assets/images/publicacoes/download.png" alt="Download">
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="boxPu">
+              <div class="categoria">
+                Nome da categoria
+              </div>
+              <div class="publicado">
+                Publicado em 20/06/2016
+              </div>
+              <h2>Lorem ispum dolor sit amet dolor sit lorem ispum sit.</h2>
+              <p>Lorem ispum dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit dolor.</p>
+              <div class="download">
+                <a href="#">
+                  <img src="assets/images/publicacoes/download.png" alt="Download">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!--Usuarios-->
+  <div class="container-fluid bgColor hidden" session="usuarios">
+    <div class="container">
+     <section class="usuarios">
+      <div class="row">
+        <h3>Usuários</h3>
+        <div class="col-md-3 sidebarPerfil">
+          <div class="col-md-12">
+            <div class="panel panel-default">
+               <div class="panel-body">       
+                <div class="box-info">
+                  <div class="box-body">
+                    <div class="col-sm-4">
+                      <div class="pull-left"> 
+                        <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
+                        <input id="profile-image-upload" class="hidden" type="file">
+                      </div>
+                    </div>
+                    <div class="col-sm-8">
+                      <h5><strong>Nome do Usuário duas linhas.</strong></h5>       
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="pedidos">
+                        <h5 class="text-center">Pedidos Inseridos: ( 111 )</h5> 
+                      </div>   
+                    </div>
+                    <div class="col-sm-6 bgBox">
+                      <div class="pedidos">
+                        <h5 class="text-center"><strong>Seguidores</strong><br><br> ( 111 )</h5> 
+                      </div>   
+                    </div>
+                    <div class="col-sm-6 bgBox">
+                      <div class="pedidos">
+                        <h5 class="text-center"><strong>Seguindo</strong><br><br> ( 111 )</h5> 
+                      </div>   
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="pedidos">
+                        <h5 class="text-center"><strong>Avaliação</strong></h5> 
+                      </div>   
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="estrelas text-center">
+                          <input type="radio" id="cm_star-empty" name="fb" value="" checked="">
+                          <label for="cm_star-1"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-1" name="fb" value="1">
+                          <label for="cm_star-2"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-2" name="fb" value="2">
+                          <label for="cm_star-3"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-3" name="fb" value="3">
+                          <label for="cm_star-4"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-4" name="fb" value="4">
+                          <label for="cm_star-5"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-5" name="fb" value="5">
+                          ( 111 )
+                        </div>
+                    </div>
+                    <div class="config">
+                      <a href="#">
+                        <div class="col-sm-4">
+                          <div class="pull-left"> 
+                            <img src="assets/images/perfil/img-roda.png" alt="Configurações">
+                          </div>
+                        </div>
+                        <div class="col-sm-8">
+                          <h5>Configurações<br> da conta</h5>       
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div> 
+            </div>
+          </div>  
+        </div>
+
+        <div class="col-md-3 sidebarPerfil">
+          <div class="col-md-12">
+            <div class="panel panel-default">
+               <div class="panel-body">       
+                <div class="box-info">
+                  <div class="box-body">
+                    <div class="col-sm-4">
+                      <div class="pull-left"> 
+                        <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
+                        <input id="profile-image-upload" class="hidden" type="file">
+                      </div>
+                    </div>
+                    <div class="col-sm-8">
+                      <h5><strong>Nome do Usuário duas linhas.</strong></h5>       
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="pedidos">
+                        <h5 class="text-center">Pedidos Inseridos: ( 111 )</h5> 
+                      </div>   
+                    </div>
+                    <div class="col-sm-6 bgBox">
+                      <div class="pedidos">
+                        <h5 class="text-center"><strong>Seguidores</strong><br><br> ( 111 )</h5> 
+                      </div>   
+                    </div>
+                    <div class="col-sm-6 bgBox">
+                      <div class="pedidos">
+                        <h5 class="text-center"><strong>Seguindo</strong><br><br> ( 111 )</h5> 
+                      </div>   
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="pedidos">
+                        <h5 class="text-center"><strong>Avaliação</strong></h5> 
+                      </div>   
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="estrelas text-center">
+                          <input type="radio" id="cm_star-empty" name="fb" value="" checked="">
+                          <label for="cm_star-1"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-1" name="fb" value="1">
+                          <label for="cm_star-2"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-2" name="fb" value="2">
+                          <label for="cm_star-3"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-3" name="fb" value="3">
+                          <label for="cm_star-4"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-4" name="fb" value="4">
+                          <label for="cm_star-5"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-5" name="fb" value="5">
+                          ( 111 )
+                        </div>
+                    </div>
+                    <div class="config">
+                      <a href="#">
+                        <div class="col-sm-4">
+                          <div class="pull-left"> 
+                            <img src="assets/images/perfil/img-roda.png" alt="Configurações">
+                          </div>
+                        </div>
+                        <div class="col-sm-8">
+                          <h5>Configurações<br> da conta</h5>       
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div> 
+            </div>
+          </div>  
+        </div>
+
+        <div class="col-md-3 sidebarPerfil">
+          <div class="col-md-12">
+            <div class="panel panel-default">
+               <div class="panel-body">       
+                <div class="box-info">
+                  <div class="box-body">
+                    <div class="col-sm-4">
+                      <div class="pull-left"> 
+                        <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
+                        <input id="profile-image-upload" class="hidden" type="file">
+                      </div>
+                    </div>
+                    <div class="col-sm-8">
+                      <h5><strong>Nome do Usuário duas linhas.</strong></h5>       
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="pedidos">
+                        <h5 class="text-center">Pedidos Inseridos: ( 111 )</h5> 
+                      </div>   
+                    </div>
+                    <div class="col-sm-6 bgBox">
+                      <div class="pedidos">
+                        <h5 class="text-center"><strong>Seguidores</strong><br><br> ( 111 )</h5> 
+                      </div>   
+                    </div>
+                    <div class="col-sm-6 bgBox">
+                      <div class="pedidos">
+                        <h5 class="text-center"><strong>Seguindo</strong><br><br> ( 111 )</h5> 
+                      </div>   
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="pedidos">
+                        <h5 class="text-center"><strong>Avaliação</strong></h5> 
+                      </div>   
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="estrelas text-center">
+                          <input type="radio" id="cm_star-empty" name="fb" value="" checked="">
+                          <label for="cm_star-1"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-1" name="fb" value="1">
+                          <label for="cm_star-2"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-2" name="fb" value="2">
+                          <label for="cm_star-3"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-3" name="fb" value="3">
+                          <label for="cm_star-4"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-4" name="fb" value="4">
+                          <label for="cm_star-5"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-5" name="fb" value="5">
+                          ( 111 )
+                        </div>
+                    </div>
+                    <div class="config">
+                      <a href="#">
+                        <div class="col-sm-4">
+                          <div class="pull-left"> 
+                            <img src="assets/images/perfil/img-roda.png" alt="Configurações">
+                          </div>
+                        </div>
+                        <div class="col-sm-8">
+                          <h5>Configurações<br> da conta</h5>       
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div> 
+            </div>
+          </div>  
+        </div>
+
+        <div class="col-md-3 sidebarPerfil">
+          <div class="col-md-12">
+            <div class="panel panel-default">
+               <div class="panel-body">       
+                <div class="box-info">
+                  <div class="box-body">
+                    <div class="col-sm-4">
+                      <div class="pull-left"> 
+                        <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
+                        <input id="profile-image-upload" class="hidden" type="file">
+                      </div>
+                    </div>
+                    <div class="col-sm-8">
+                      <h5><strong>Nome do Usuário duas linhas.</strong></h5>       
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="pedidos">
+                        <h5 class="text-center">Pedidos Inseridos: ( 111 )</h5> 
+                      </div>   
+                    </div>
+                    <div class="col-sm-6 bgBox">
+                      <div class="pedidos">
+                        <h5 class="text-center"><strong>Seguidores</strong><br><br> ( 111 )</h5> 
+                      </div>   
+                    </div>
+                    <div class="col-sm-6 bgBox">
+                      <div class="pedidos">
+                        <h5 class="text-center"><strong>Seguindo</strong><br><br> ( 111 )</h5> 
+                      </div>   
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="pedidos">
+                        <h5 class="text-center"><strong>Avaliação</strong></h5> 
+                      </div>   
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="estrelas text-center">
+                          <input type="radio" id="cm_star-empty" name="fb" value="" checked="">
+                          <label for="cm_star-1"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-1" name="fb" value="1">
+                          <label for="cm_star-2"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-2" name="fb" value="2">
+                          <label for="cm_star-3"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-3" name="fb" value="3">
+                          <label for="cm_star-4"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-4" name="fb" value="4">
+                          <label for="cm_star-5"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-5" name="fb" value="5">
+                          ( 111 )
+                        </div>
+                    </div>
+                    <div class="config">
+                      <a href="#">
+                        <div class="col-sm-4">
+                          <div class="pull-left"> 
+                            <img src="assets/images/perfil/img-roda.png" alt="Configurações">
+                          </div>
+                        </div>
+                        <div class="col-sm-8">
+                          <h5>Configurações<br> da conta</h5>       
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div> 
+            </div>
+          </div>  
+        </div>
+      </div>
+     </section>
+    </div>
+   </div>
+
+
+   <!--Cursos-->
+   <section class="curso hidden" session="cursos">
+     <div class="container-fluid bgColor">
+      <div class="container cursos">
+        <h3>Curso</h3>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <div class="box">
+            <div class="categoria">
+              Curso presencial
+            </div>
+            <div class="titulo">
+              <strong>Introdução a RAC</strong> <br>( reportagem com auxilio de computador )
+            </div>
+            
+            <div class="relogio">        
+              <img src="assets/images/cursos/icon-relogio.png" alt="Relogio">
+              <span>Duração</span><br>
+              <span>8 horas aula ou 12 horas aula</span>
+            </div>
+            <div class="alunos">        
+              <img src="assets/images/cursos/icon-alunos.png" alt="Alunos">
+              <span>Número de alunos por curso</span><br>
+              <span>25 alunos</span>
+            </div>
+            <div class="onde">        
+              <img src="assets/images/cursos/icon-maps.png" alt="Maps">
+              <span>Endereço</span><br>
+              <span>Lorem ispum dolor sit - 824 - São Pualo - SP</span>
+            </div>
+            <hr>
+            <div class="botoes">
+              <ul class="loginDesk">
+                <li><a href="#">Inscreva-se</a></li>     
+                <li><a href="#" data-toggle="modal" data-target="#modalPresencial">Saiba Mais</a></li>                         
+              </ul>
+            </div>
+          </div>
+
+          <!-- line modal -->
+            <div class="modal fade" id="modalPresencial" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"> 
+                      <img src="assets/images/cursos/fechar.png" alt="Fechar"></span>
+                    <span class="sr-only">Close</span>
+                  </button>
+                </div>
+                <div class="modal-body">              
+                <!-- content goes here -->
+                  <div class="box">
+                    <div class="categoria">
+                      Curso presencial
+                    </div>
+                    <div class="titulo">
+                      <strong>Introdução a RAC</strong> <br>( reportagem com auxilio de computador )
+                    </div>
+                    <div class="detalhe">
+                      <ul>
+                        <li>Conceitos e hirória da RAC</li><br>
+                        <li>Otimizando buscas no Google</li><br>
+                        <li>Pesquesa avançada na internet. ( 70% do que o Google não alcança )</li><br>
+                        <li>Calculos basicos em planilha eletrônica</li><br>
+                        <li>Introdução a banco de dados</li><br>
+                        <li>Visualização de informação ( Geração de gráficos simples )</li><br>
+                      </ul>
+                    </div>
+                    <div class="relogio">        
+                      <img src="assets/images/cursos/icon-relogio.png" alt="Relogio">
+                      <span>Duração</span><br>
+                      <span>8 horas aula ou 12 horas aula</span>
+                    </div>
+                    <div class="alunos">        
+                      <img src="assets/images/cursos/icon-alunos.png" alt="Alunos">
+                      <span>Número de alunos por curso</span><br>
+                      <span>25 alunos</span>
+                    </div>
+                    <div class="onde">        
+                      <img src="assets/images/cursos/icon-maps.png" alt="Maps">
+                      <span>Endereço</span><br>
+                      <span>Lorem ispum dolor sit - 824 - São Pualo - SP</span>
+                    </div>
+                    <hr>
+                    <div class="botoes">
+                      <ul class="loginDesk">
+                        <li><a href="#">Inscreva-se</a></li>                            
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <div class="box">
+            <div class="categoria online">
+              Curso online
+            </div>
+            <div class="titulo">
+              <strong>Introdução a RAC</strong> <br>( reportagem com auxilio de computador )
+            </div>
+            
+            <div class="relogio">        
+              <img src="assets/images/cursos/icon-relogio.png" alt="Relogio">
+              <span>Duração</span><br>
+              <span>8 horas aula ou 12 horas aula</span>
+            </div>
+            <div class="alunos">        
+              <img src="assets/images/cursos/icon-alunos.png" alt="Alunos">
+              <span>Número de alunos por curso</span><br>
+              <span>25 alunos</span>
+            </div>
+            <hr class="boxDois">
+            <div class="botoes">
+              <ul class="loginDesk">
+                <li><a href="#">Inscreva-se</a></li>     
+                <li><a href="#" data-toggle="modal" data-target="#modalOnline">Saiba Mais</a></li>                         
+              </ul>
+            </div>
+          </div>
+           <!-- line modal -->
+            <div class="modal fade Modalonline" id="modalOnline" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"> 
+                      <img src="assets/images/cursos/fechar.png" alt="Fechar"></span>
+                    <span class="sr-only">Close</span>
+                  </button>
+                </div>
+                <div class="modal-body">              
+                <!-- content goes here -->
+                  <div class="box">
+                    <div class="categoria online">
+                      Curso online
+                    </div>
+                    <div class="titulo">
+                      <strong>Introdução a RAC</strong> <br>( reportagem com auxilio de computador )
+                    </div>
+                    <div class="detalhe">
+                      <ul>
+                        <li>Conceitos e hirória da RAC</li><br>
+                        <li>Otimizando buscas no Google</li><br>
+                        <li>Pesquesa avançada na internet. ( 70% do que o Google não alcança )</li><br>
+                        <li>Calculos basicos em planilha eletrônica</li><br>
+                        <li>Introdução a banco de dados</li><br>
+                        <li>Visualização de informação ( Geração de gráficos simples )</li><br>
+                      </ul>
+                    </div>
+                    <div class="relogio">        
+                      <img src="assets/images/cursos/icon-relogio.png" alt="Relogio">
+                      <span>Duração</span><br>
+                      <span>8 horas aula ou 12 horas aula</span>
+                    </div>
+                    <div class="alunos">        
+                      <img src="assets/images/cursos/icon-alunos.png" alt="Alunos">
+                      <span>Número de alunos por curso</span><br>
+                      <span>25 alunos</span>
+                    </div>
+                    <hr class="boxDois">
+                    <div class="botoes">
+                      <ul class="loginDesk">
+                        <li><a href="#">Inscreva-se</a></li>                            
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+        </div>
+      </div>  
+      </div>
+   </section>
+
+   <!--Na Midia-->
+   <div class="container-fluid bgColor hidden" session="namidia">
+   <div class="container">
+     <section class="BuscaNaMidia">
+       <div class="row">
+        <h3>Na Mídia</h3>
+        <div class="col-md-4 col-sm-6">
+          <div class="card hovercard">
+                  <div class="cardheader">
+                    <img src="assets/images/na-midia/img-media-2.png" alt="">
+                  </div>
+
+                  <div class="info">
+                    <div class="publicado2">
+                        Publicado em 01/05/2017
+                    </div>
+                    <div class="desc"><strong>Lorem ipsum dolor sit amet dolor sit ipsum dolor sit amet dolor sit </strong></div>
+                    <div class="desc2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id rhoncus nunc, sed euismod nulla. Sed gravida turpis ut sagittis pharetra. Cras varius pretium quam et fermentum. Vestibulum placerat vel purus at lobortis. Suspendisse sed maximus nulla. </div>
+                  </div>
+                  <div class="bottom2">
+                  <img src="assets/images/na-midia/icon-face.png" alt="Facebook">
+                  <img src="assets/images/na-midia/icon-gplus.png" alt="Google Plus">
+                  <img src="assets/images/na-midia/icon-twiiter.png" alt="Twitter">
+
+                  <div class="bntVerMais pull-right">
+                    <a href="detalhe-da-materia.php">Ver <div class="seta2 seta-direita"></div></a>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <div class="card hovercard">
+                <div class="cardheader">
+                  <img src="assets/images/na-midia/img-media-2.png" alt="">
+                </div>
+                <div class="info">
+                  <div class="publicado2">
+                      Publicado em 01/05/2017
+                  </div>
+                  <div class="desc"><strong>Lorem ipsum dolor sit amet dolor sit ipsum dolor sit amet dolor sit </strong></div>
+                  <div class="desc2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id rhoncus nunc, sed euismod nulla. Sed gravida turpis ut sagittis pharetra. Cras varius pretium quam et fermentum. Vestibulum placerat vel purus at lobortis. Suspendisse sed maximus nulla. </div>
+                </div>
+                 <div class="bottom2">
+                  <img src="assets/images/na-midia/icon-face.png" alt="Facebook">
+                  <img src="assets/images/na-midia/icon-gplus.png" alt="Google Plus">
+                  <img src="assets/images/na-midia/icon-twiiter.png" alt="Twitter">
+
+                  <div class="bntVerMais pull-right">
+                    <a href="detalhe-da-materia.php">Ver <div class="seta2 seta-direita"></div></a>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <div class="card hovercard">
+                <div class="cardheader">
+                  <img src="assets/images/na-midia/img-media-2.png" alt="">
+                </div>
+                <div class="info">
+                  <div class="publicado2">
+                      Publicado em 01/05/2017
+                  </div>
+                  <div class="desc"><strong>Lorem ipsum dolor sit amet dolor sit ipsum dolor sit amet dolor sit </strong></div>
+                  <div class="desc2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id rhoncus nunc, sed euismod nulla. Sed gravida turpis ut sagittis pharetra. Cras varius pretium quam et fermentum. Vestibulum placerat vel purus at lobortis. Suspendisse sed maximus nulla. </div>
+                </div>
+                 <div class="bottom2">
+                  <img src="assets/images/na-midia/icon-face.png" alt="Facebook">
+                  <img src="assets/images/na-midia/icon-gplus.png" alt="Google Plus">
+                  <img src="assets/images/na-midia/icon-twiiter.png" alt="Twitter">
+
+                  <div class="bntVerMais pull-right">
+                    <a href="detalhe-da-materia.php">Ver <div class="seta2 seta-direita"></div></a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+     </section>
+   </div>
+ </div>
+
+
+        <div class="row">
+            <div class="text-center">
+              <ul class="pagination pagination-large" id="ulPagination">
+                
+              </ul>
+            </div>
+        </div>
+
+
+</div>
+
+    <footer>
+      <div class="container-fluid bgFooter">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <img src="assets/images/footer/logo-projeto.png" alt="Logo"/>
+            </div>
+            <div class="col-md-5 col-sm-6 col-xs-12">
+              <h2>Sobre</h2>
+              <ul>
+                <div class="col-md-4 col-sm-6 col-xs-6">
+                  <li><a href="#">Institucional</a></li>
+                  <li><a href="#">Dúvidas</a></li>
+                  <li><a href="#">Na Mídia</a></li>
+                  <li><a href="#">Contato</a></li>
+                </div>
+                <div class="col-md-5 col-sm-6 col-xs-6">
+                  <li><a href="#">Publicações</a></li>
+                  <li><a href="#">Pedidos</a></li>
+                  <li><a href="#">Dados</a></li>
+                  <li><a href="#">Cursos</a></li>
+                </div>
+              </ul>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12 pull-right">
+              <div class="redesSociais">
+                <a href="#" target="_blank"><img src="assets/images/footer/twitter.jpg" alt="Twitter"/></a>
+                <a href="#" target="_blank"><img src="assets/images/footer/facebook.jpg" alt="Facebook"/></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+       
+        <div class="row last">
+          <div class="col-md-1 col-sm-12 col-xs-12 no-gutter-left">
+            <img src="assets/images/footer/logo-creative.jpg" alt="creative" class="ImgCreative"/>
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="politica">
+            <p>
+              Todo o nosso conteúdo pode ser publicado ou reutilizados de forma gratuita, exceto para a maioria das fotografias, ilustrações e vídeos.</p>
+              <a href="politica-de-uso.php"><strong>Política de Uso</strong></a><span>e</span>  <a href="termos-de-privacidade.php"><strong>Termos de Privacidade</strong></a>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-12 col-xs-12 copyright no-gutter-right">
+            <p>2016 © Achados e Pedidos.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
+    <!-- Deferred JavaScript -->
+    
+    <script type="text/javascript" src="assets/js/wow/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+    <script src="assets/js/bootstrap-filestyle.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <script src="assets/js/index.js"></script>
+
+  </body>
+</html>

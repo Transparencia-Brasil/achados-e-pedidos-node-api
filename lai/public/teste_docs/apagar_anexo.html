@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <title>Apagar Enxo</title>
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td>codigo_anexo</td>
+                <td><input type="text" id="codigo_anexo"></td>
+            </tr>
+            <tr><td colspan="2"><input type="button" id="btnApagar" value="Apagar"></td></tr>
+        </table>
+    </body>
+</html>
+
+<script>
+
+
+$(function () {
+
+    $(document).ready(function () {
+        $( "#btnApagar" ).click(function() {
+            apagar();
+        });        
+    });
+
+    function apagar() {
+
+        var urlApi = '/api/anexos/apagar/' + $('#codigo_anexo').val();
+
+        $.ajax(urlApi, {
+            method: "DELETE",
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: "json",
+            success: function (result) {
+                alert("Anexo apagado");
+            },
+            error: function (err) {
+                alert("Erro");
+            }
+        });
+    }
+
+});
+
+</script>

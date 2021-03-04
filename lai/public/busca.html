@@ -1,0 +1,1032 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+
+        <!-- Description -->
+        <title>Portal LAI - Achados e Pedidos</title>
+        <meta name="description" content="">
+
+        <!-- Viewport -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+        <!-- Favicon -->
+        <link rel="icon" href="assets/images/favicon-16x16.png" sizes="16x16">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="assets/css/public.css">
+
+        <style>
+        em{background-color:#ff0}
+        </style>
+    </head>
+    <body>
+      <div class="wrapper">
+       <header>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-sm-12 col-xs-12 logosHeader">
+                <a href="http://www.abraji.org.br/" target="_blank">
+                  <img src="assets/images/home/logo-abraji.png" alt="Abraji" class="img-first">
+                </a>
+                <a href="http://www.transparencia.org.br/" target="_blank">
+                  <img src="assets/images/home/logo-tranparencia.png" alt="Tranparência Brasil" class="img-last hidden-xs">
+                  <img src="assets/images/home/logo-tranparencia-mobile.png" alt="Tranparência Brasil" class="img-last visible-xs">
+                </a>
+              </div>
+              <div class="col-md-4 col-sm-12 col-xs-12">
+                <ul class="nav navbar-nav navbar-letf loginDesk">
+                  <li class="btnLogin"><a href="login.php">Entrar</a></li>
+                  <li class="btnInserirPedido"><a href="inserir-pedidos.php">Inserir Pedido</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <nav class="navbar navbar-default">
+            <div class="container">
+              <div class="row">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="index.php"><img src="assets/images/home/logo-projeto.png" alt="logo"></a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav navBar-bottom">
+                    <li class="dropdownMenu">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b> Sobre </a>
+                      <ul class="dropdown-menu2">
+                        <li><a href="institucional.php">Institucional</a></li>
+                        <li><a href="duvidas-frequentes.php">Dúvidas</a></li>
+                        <li><a href="na-midia.php">Na Mídia</a></li>
+                        <li><a href="contato.php">Contato</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="pedidos.php">Pedidos</a></li>
+                    <li><a href="publicacoes.php">Publicações</a></li>
+                    <li><a href="cursos.php" class="menuLast">Cursos</a></li>
+                    <li class="loginMobile"><a href="login.php">Entrar</a></li>
+                    <li class="loginMobile"><a href="inserir-pedidos.php">Cadastrar-se</a></li>
+                    <form class="navbar-form navbar-right" role="search" action="resultado-de-busca.php">
+                      <div id="custom-search-input">
+                          <div class="input-group col-md-12">
+                              <input type="text" class="form-control input-lg" placeholder="Digite aqui sua busca" />
+                              <span class="input-group-btn">
+                                  <button class="btn btn-info btn-lg" type="button">
+                                      <i class="glyphicon glyphicon-search"></i>
+                                  </button>
+                              </span>
+                          </div>
+                      </div>
+                    </form>
+                  </ul>
+                </div>
+              </div>
+              <!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+          </nav>
+        </header>
+
+<div class="container">
+  <div class="row">
+    <ul class="breadcrumb">
+      <li class="completed">Home</li>
+      <li class="active"><a href="#">Busca</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="busca">
+
+  <!--Pedidos-->
+  <div class="container">
+      <section class="buscaForm">
+        <div class="row">
+        <div class="col-md-1"></div>
+          <div class="col-md-4">
+           <form role="search" action="">
+            <div id="custom-search-input">
+                <div class="input-group col-md-12">
+
+                  <input list="fieldList" name="fieldValue" id="fieldValue" class="form-control input-lg" placeholder="Digite aqui sua busca">
+                  <datalist id="fieldList">
+                  </datalist>
+                  
+                  
+                  
+                  
+                    <span class="input-group-btn">
+                        <button id="btnsearch" class="btn btn-info btn-lg" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+          </form>
+          </div>
+          <div class="col-md-4"></div>
+          </div>
+          <div class="row bnts">
+            <div class="col-md-2">
+              <div class="bntVerMais selected" repo="pedidos">
+                <a href="#">Pedidos</a>
+              </div>
+            </div>
+             <div class="col-md-2">
+              <div class="bntVerMais" repo="orgaospublicos">
+                <a href="#">Órgãos Públicos</a>
+              </div>
+            </div>
+             <div class="col-md-2">
+              <div class="bntVerMais" repo="publicacoes">
+                <a href="#">Públicações</a>
+              </div>
+            </div>
+             <div class="col-md-2">
+              <div class="bntVerMais" repo="usuarios">
+                <a href="#">Usuários</a>
+              </div>
+            </div>
+             <div class="col-md-2">
+              <div class="bntVerMais" repo="cursos">
+                <a href="#">Cursos</a>
+              </div>
+            </div>
+             <div class="col-md-2">
+              <div class="bntVerMais" repo="namidia">
+                <a href="#">Na mídia</a>
+              </div>
+            </div>
+          </div>
+      </section>
+  </div>
+
+  <!--Pedidos-->
+  <div class="container-fluid bgColor show" session="pedidos">
+    <div class="container pedidos pedidosOrgaos">
+      <section>
+         <h3>Pedidos</h3>
+         <h4>Resultado para: "<span id="termo-display"></span>"</h4>
+         <h5>Foram encontrados <span id="hits-total-display"></span> pedidos - Mostrando <span id="paginacao-de"></span> de <span id="paginacao-ate"></span>.</h5>
+         <div class="row" id="boxes-resultados">
+            <!-- Card pedido -->
+        
+
+            <!-- // Card pedido -->
+         </div>
+      </section>
+    </div>
+  </div>
+  <!--Órgãos Públicos:-->
+  <div class="container-fluid bgColor hidden" session="orgaospublicos">
+    <div class="container agentes">
+     <section>
+      <h3>Órgãos públicos</h3>
+      <h4>Resultado para: "Lorem ispum dolor"</h4>
+      <h5>Foram encontrados 150 órgãos públicos - Mostrando 50 de 100.</h5>
+      <div class="row">
+          <!-- Card agentes -->
+          <div class="col-md-3 cartao">
+            <h4>
+              <strong>Lorem ispum dolor sit amet lorem ispum dolor it amet lorem ipsum.</strong>
+            </h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id rhoncus nunc, sed euismod nulla. Sed gravida turpis ut sagittis pharetra. Cras varius pretium quam. 
+            </p>
+            <div class="bntVerMais pull-right">
+              <a href="#">Ver <div class="seta seta-direita"></div></a>
+            </div>
+          </div>
+          <!-- // Card agentes -->
+          <!-- Card agentes -->
+          <div class="col-md-3 cartao">
+            <h4>
+              <strong>Lorem ispum dolor sit amet lorem ispum dolor it amet lorem ipsum.</strong>
+            </h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id rhoncus nunc, sed euismod nulla. Sed gravida turpis ut sagittis pharetra. Cras varius pretium quam. 
+            </p>
+            <div class="bntVerMais pull-right">
+              <a href="#">Ver <div class="seta seta-direita"></div></a>
+            </div>
+          </div>
+          <!-- // Card agentes -->
+          <!-- Card agentes -->
+          <div class="col-md-3 cartao">
+            <h4>
+              <strong>Lorem ispum dolor sit amet lorem ispum dolor it amet lorem ipsum.</strong>
+            </h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id rhoncus nunc, sed euismod nulla. Sed gravida turpis ut sagittis pharetra. Cras varius pretium quam. 
+            </p>
+            <div class="bntVerMais pull-right">
+              <a href="#">Ver <div class="seta seta-direita"></div></a>
+            </div>
+          </div>
+          <!-- // Card agentes -->
+          <!-- Card agentes -->
+          <div class="col-md-3 cartao">
+            <h4>
+              <strong>Lorem ispum dolor sit amet lorem ispum dolor it amet lorem ipsum.</strong>
+            </h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id rhoncus nunc, sed euismod nulla. Sed gravida turpis ut sagittis pharetra. Cras varius pretium quam. 
+            </p>
+            <div class="bntVerMais pull-right">
+              <a href="#">Ver <div class="seta seta-direita"></div></a>
+            </div>
+          </div>
+          <!-- // Card agentes -->
+          <!-- Card agentes -->
+          <div class="col-md-3 cartao">
+            <h4>
+              <strong>Lorem ispum dolor sit amet lorem ispum dolor it amet lorem ipsum.</strong>
+            </h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id rhoncus nunc, sed euismod nulla. Sed gravida turpis ut sagittis pharetra. Cras varius pretium quam. 
+            </p>
+            <div class="bntVerMais pull-right">
+              <a href="#">Ver <div class="seta seta-direita"></div></a>
+            </div>
+          </div>
+          <!-- // Card agentes -->
+          <!-- Card agentes -->
+          <div class="col-md-3 cartao">
+            <h4>
+              <strong>Lorem ispum dolor sit amet lorem ispum dolor it amet lorem ipsum.</strong>
+            </h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id rhoncus nunc, sed euismod nulla. Sed gravida turpis ut sagittis pharetra. Cras varius pretium quam. 
+            </p>
+            <div class="bntVerMais pull-right">
+              <a href="#">Ver <div class="seta seta-direita"></div></a>
+            </div>
+          </div>
+          <!-- // Card agentes -->
+      </div>
+      </section>
+    </div>
+</div>
+
+
+  <!--Publicacoes-->
+  <div class="container-fluid bgColor hidden" session="publicacoes">
+    <div class="container publicacoes">
+      <section>
+        <h3>Publicações</h3>
+        <h4>Resultado para: "Lorem ispum dolor"</h4>
+        <h5>Foram encontrados 150 publicações - Mostrando 50 de 100.</h5>        
+        <div class="row">
+          <!-- CARD PUBLICACAO -->
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="box">
+              <div class="categoria">
+                Nome da categoria
+              </div>
+              <div class="publicado">
+                Publicado em 20/06/2016
+              </div>
+              <h2>Lorem ispum dolor sit amet dolor sit lorem ispum sit.</h2>
+              <p>Lorem ispum dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit dolor.</p>
+              <div class="download">
+                <a href="#">
+                  <img src="assets/images/publicacoes/download.png" alt="Download">
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- //CARD PUBLICACAO -->
+          <!-- CARD PUBLICACAO -->
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="box">
+              <div class="categoria">
+                Nome da categoria
+              </div>
+              <div class="publicado">
+                Publicado em 20/06/2016
+              </div>
+              <h2>Lorem ispum dolor sit amet dolor sit lorem ispum sit.</h2>
+              <p>Lorem ispum dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit dolor.</p>
+              <div class="download">
+                <a href="#">
+                  <img src="assets/images/publicacoes/download.png" alt="Download">
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- //CARD PUBLICACAO -->
+          <!-- CARD PUBLICACAO -->
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="box">
+              <div class="categoria">
+                Nome da categoria
+              </div>
+              <div class="publicado">
+                Publicado em 20/06/2016
+              </div>
+              <h2>Lorem ispum dolor sit amet dolor sit lorem ispum sit.</h2>
+              <p>Lorem ispum dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit dolor.</p>
+              <div class="download">
+                <a href="#">
+                  <img src="assets/images/publicacoes/download.png" alt="Download">
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- //CARD PUBLICACAO -->
+          <!-- CARD PUBLICACAO -->
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="box">
+              <div class="categoria">
+                Nome da categoria
+              </div>
+              <div class="publicado">
+                Publicado em 20/06/2016
+              </div>
+              <h2>Lorem ispum dolor sit amet dolor sit lorem ispum sit.</h2>
+              <p>Lorem ispum dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit dolor.</p>
+              <div class="download">
+                <a href="#">
+                  <img src="assets/images/publicacoes/download.png" alt="Download">
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- //CARD PUBLICACAO -->
+          <!-- CARD PUBLICACAO -->
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="box">
+              <div class="categoria">
+                Nome da categoria
+              </div>
+              <div class="publicado">
+                Publicado em 20/06/2016
+              </div>
+              <h2>Lorem ispum dolor sit amet dolor sit lorem ispum sit.</h2>
+              <p>Lorem ispum dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit dolor.</p>
+              <div class="download">
+                <a href="#">
+                  <img src="assets/images/publicacoes/download.png" alt="Download">
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- //CARD PUBLICACAO -->
+          <!-- CARD PUBLICACAO -->
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="box">
+              <div class="categoria">
+                Nome da categoria
+              </div>
+              <div class="publicado">
+                Publicado em 20/06/2016
+              </div>
+              <h2>Lorem ispum dolor sit amet dolor sit lorem ispum sit.</h2>
+              <p>Lorem ispum dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit amet dolor sit lorem ispum sit met lorem ipsum dolor sit dolor sit dolor.</p>
+              <div class="download">
+                <a href="#">
+                  <img src="assets/images/publicacoes/download.png" alt="Download">
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- //CARD PUBLICACAO -->
+
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!--Usuarios-->
+  <div class="container-fluid bgColor hidden" session="usuarios">
+    <div class="container">
+     <section class="usuarios perfil">
+      <h3>Usuários</h3>
+      <h4>Resultado para: "Lorem ispum dolor"</h4>
+      <h5>Foram encontrados 150 usuários - Mostrando 50 de 100.</h5>
+      <div class="row">
+        <!-- CARD USUARIO -->
+          <div class="col-md-3 sidebarPerfil card-bgbranco">
+            <div class="col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="box-info">
+                    <div class="box-body">
+                      <div class="col-sm-12">
+                        <h5><strong><a href="#">Nome do Usuário duas linhas.</a></strong></h5>
+                      </div>
+                      <div class="col-sm-12 col-xs-12 bgBox">
+                        <div>
+                          <h5 class="text-center"><a href="#"><strong>Pedidos Inseridos</strong></a><br><br> ( 111 )</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-xs-12 bgBox">
+                        <div>
+                          <h5 class="text-center"><a href="#"><strong>Seguidores</strong></a><br><br> ( 111 )</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-xs-12 bgBox margin-bottom">
+                        <div>
+                          <h5 class="text-center"><a href="#"><strong>Seguindo</strong></a><br><br> ( 111 )</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div>
+                          <h5 class="text-center"><strong>Avaliação</strong></h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="estrelas text-center">
+                          <input type="radio" id="cm_star-empty" name="fb" value="" checked="">
+                          <label for="cm_star-1"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-1" name="fb" value="1">
+                          <label for="cm_star-2"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-2" name="fb" value="2">
+                          <label for="cm_star-3"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-3" name="fb" value="3">
+                          <label for="cm_star-4"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-4" name="fb" value="4">
+                          <label for="cm_star-5"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-5" name="fb" value="5">
+                          ( 111 )
+                        </div>
+                      </div>
+                      <div class="col-sm-12 bt-seguir-margin-left">
+                        <div class="bntVerMais"><a href="#">Seguir</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- // CARD USUARIO -->
+        <!-- CARD USUARIO -->
+          <div class="col-md-3 sidebarPerfil card-bgbranco">
+            <div class="col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="box-info">
+                    <div class="box-body">
+                      <div class="col-sm-12">
+                        <h5><strong><a href="#">Nome do Usuário duas linhas.</a></strong></h5>
+                      </div>
+                      <div class="col-sm-12 col-xs-12 bgBox">
+                        <div>
+                          <h5 class="text-center"><a href="#"><strong>Pedidos Inseridos</strong></a><br><br> ( 111 )</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-xs-12 bgBox">
+                        <div>
+                          <h5 class="text-center"><a href="#"><strong>Seguidores</strong></a><br><br> ( 111 )</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-xs-12 bgBox margin-bottom">
+                        <div>
+                          <h5 class="text-center"><a href="#"><strong>Seguindo</strong></a><br><br> ( 111 )</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div>
+                          <h5 class="text-center"><strong>Avaliação</strong></h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="estrelas text-center">
+                          <input type="radio" id="cm_star-empty" name="fb" value="" checked="">
+                          <label for="cm_star-1"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-1" name="fb" value="1">
+                          <label for="cm_star-2"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-2" name="fb" value="2">
+                          <label for="cm_star-3"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-3" name="fb" value="3">
+                          <label for="cm_star-4"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-4" name="fb" value="4">
+                          <label for="cm_star-5"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-5" name="fb" value="5">
+                          ( 111 )
+                        </div>
+                      </div>
+                      <div class="col-sm-12 bt-seguir-margin-left">
+                        <div class="bntVerMais"><a href="#">Seguir</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- // CARD USUARIO -->
+        <!-- CARD USUARIO -->
+          <div class="col-md-3 sidebarPerfil card-bgbranco">
+            <div class="col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="box-info">
+                    <div class="box-body">
+                      <div class="col-sm-12">
+                        <h5><strong><a href="#">Nome do Usuário duas linhas.</a></strong></h5>
+                      </div>
+                      <div class="col-sm-12 col-xs-12 bgBox">
+                        <div>
+                          <h5 class="text-center"><a href="#"><strong>Pedidos Inseridos</strong></a><br><br> ( 111 )</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-xs-12 bgBox">
+                        <div>
+                          <h5 class="text-center"><a href="#"><strong>Seguidores</strong></a><br><br> ( 111 )</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-xs-12 bgBox margin-bottom">
+                        <div>
+                          <h5 class="text-center"><a href="#"><strong>Seguindo</strong></a><br><br> ( 111 )</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div>
+                          <h5 class="text-center"><strong>Avaliação</strong></h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="estrelas text-center">
+                          <input type="radio" id="cm_star-empty" name="fb" value="" checked="">
+                          <label for="cm_star-1"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-1" name="fb" value="1">
+                          <label for="cm_star-2"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-2" name="fb" value="2">
+                          <label for="cm_star-3"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-3" name="fb" value="3">
+                          <label for="cm_star-4"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-4" name="fb" value="4">
+                          <label for="cm_star-5"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-5" name="fb" value="5">
+                          ( 111 )
+                        </div>
+                      </div>
+                      <div class="col-sm-12 bt-seguir-margin-left">
+                        <div class="bntVerMais"><a href="#">Seguir</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- // CARD USUARIO -->
+        <!-- CARD USUARIO -->
+          <div class="col-md-3 sidebarPerfil card-bgbranco">
+            <div class="col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="box-info">
+                    <div class="box-body">
+                      <div class="col-sm-12">
+                        <h5><strong><a href="#">Nome do Usuário duas linhas.</a></strong></h5>
+                      </div>
+                      <div class="col-sm-12 col-xs-12 bgBox">
+                        <div>
+                          <h5 class="text-center"><a href="#"><strong>Pedidos Inseridos</strong></a><br><br> ( 111 )</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-xs-12 bgBox">
+                        <div>
+                          <h5 class="text-center"><a href="#"><strong>Seguidores</strong></a><br><br> ( 111 )</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-xs-12 bgBox margin-bottom">
+                        <div>
+                          <h5 class="text-center"><a href="#"><strong>Seguindo</strong></a><br><br> ( 111 )</h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div>
+                          <h5 class="text-center"><strong>Avaliação</strong></h5>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="estrelas text-center">
+                          <input type="radio" id="cm_star-empty" name="fb" value="" checked="">
+                          <label for="cm_star-1"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-1" name="fb" value="1">
+                          <label for="cm_star-2"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-2" name="fb" value="2">
+                          <label for="cm_star-3"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-3" name="fb" value="3">
+                          <label for="cm_star-4"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-4" name="fb" value="4">
+                          <label for="cm_star-5"><i class="fa"></i></label>
+                          <input type="radio" id="cm_star-5" name="fb" value="5">
+                          ( 111 )
+                        </div>
+                      </div>
+                      <div class="col-sm-12 bt-seguir-margin-left">
+                        <div class="bntVerMais"><a href="#">Seguir</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- // CARD USUARIO -->
+      </div>
+     </section>
+    </div>
+   </div>
+
+
+   <!--Cursos-->
+  <div class="container-fluid bgColor hidden" session="cursos">
+    <div class="container cursos">
+      <section>
+        <h3>Cursos</h3>
+        <h4>Resultado para: "Lorem ispum dolor"</h4>
+        <h5>Foram encontrados 150 cursos - Mostrando 50 de 100.</h5>
+        <div class="row">
+          <!--- bloco curso -->
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="box">
+              <div class="categoria">
+                Curso presencial
+              </div>
+              <div class="titulo">
+                <strong>Introdução a RAC</strong> <br>( reportagem com auxilio de computador )
+              </div>
+              <div class="boxsub">
+                <div class="relogio">
+                  <img src="assets/images/cursos/icon-relogio.png" alt="Relogio">
+                  <span>Duração</span><br>
+                  <span>8 horas aula ou 12 horas aula</span>
+                </div>
+                <div class="alunos">
+                  <img src="assets/images/cursos/icon-alunos.png" alt="Alunos">
+                  <span>Número de alunos por curso</span><br>
+                  <span>25 alunos</span>
+                </div>
+                <div class="onde">
+                  <img src="assets/images/cursos/icon-maps.png" alt="Maps">
+                  <span>Endereço</span><br>
+                  <span>Lorem ispum dolor sit - 824 - São Paulo - SP</span>
+                </div>
+              </div>
+              <hr/>
+              <div class="botoes">
+                <ul class="loginDesk">
+                  <li><a href="#">Inscreva-se</a></li>
+                  <li><a href="#" data-toggle="modal" data-target="#modalcurso1">Saiba Mais</a></li>
+                </ul>
+              </div>
+            </div>
+            <!-- line modal -->
+            <div class="modal fade" id="modalcurso1" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">
+                      <img src="assets/images/cursos/fechar.png" alt="Fechar"></span>
+                    <span class="sr-only">Close</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                <!-- content goes here -->
+                  <div class="box">
+                    <div class="categoria">
+                      Curso presencial
+                    </div>
+                    <div class="titulo">
+                      <strong>Introdução a RAC</strong> <br>( reportagem com auxilio de computador )
+                    </div>
+                    <div class="detalhe">
+                      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                    </div>
+                    <div class="boxsub">
+                    <div class="relogio">
+                      <img src="assets/images/cursos/icon-relogio.png" alt="Relogio">
+                      <span>Duração</span><br>
+                      <span>8 horas aula ou 12 horas aula</span>
+                    </div>
+                    <div class="alunos">
+                      <img src="assets/images/cursos/icon-alunos.png" alt="Alunos">
+                      <span>Número de alunos por curso</span><br>
+                      <span>25 alunos</span>
+                    </div>
+                    <div class="onde">
+                      <img src="assets/images/cursos/icon-maps.png" alt="Maps">
+                      <span>Endereço</span><br>
+                      <span>Lorem ispum dolor sit - 824 - São Paulo - SP</span>
+                    </div>
+                  </div>
+                    <hr/>
+                    <div class="botoes">
+                      <ul class="loginDesk">
+                        <li><a href="#">Inscreva-se</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <!--// line modal -->
+          </div>
+          <!---// bloco curso -->
+
+<!--- bloco curso -->
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="box">
+              <div class="categoria online">
+                Curso online
+              </div>
+              <div class="titulo">
+                <strong>Introdução a RAC</strong> <br>( reportagem com auxilio de computador )
+              </div>
+              <div class="boxsub">
+                <div class="relogio">
+                  <img src="assets/images/cursos/icon-relogio.png" alt="Relogio">
+                  <span>Duração</span><br>
+                  <span>8 horas aula ou 12 horas aula</span>
+                </div>
+                <div class="alunos">
+                  <img src="assets/images/cursos/icon-alunos.png" alt="Alunos">
+                  <span>Número de alunos por curso</span><br>
+                  <span>25 alunos</span>
+                </div>
+              </div>
+              <hr/>
+              <div class="botoes">
+                <ul class="loginDesk">
+                  <li><a href="#">Inscreva-se</a></li>
+                  <li><a href="#" data-toggle="modal" data-target="#modalcurso2">Saiba Mais</a></li>
+                </ul>
+              </div>
+            </div>
+            <!-- line modal -->
+            <div class="modal fade" id="modalcurso2" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">
+                      <img src="assets/images/cursos/fechar.png" alt="Fechar"></span>
+                    <span class="sr-only">Close</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                <!-- content goes here -->
+                  <div class="box">
+                    <div class="categoria online">
+                      Curso online
+                    </div>
+                    <div class="titulo">
+                      <strong>Introdução a RAC</strong> <br>( reportagem com auxilio de computador )
+                    </div>
+                    <div class="detalhe">
+                      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                    </div>
+                    <div class="boxsub">
+                    <div class="relogio">
+                      <img src="assets/images/cursos/icon-relogio.png" alt="Relogio">
+                      <span>Duração</span><br>
+                      <span>8 horas aula ou 12 horas aula</span>
+                    </div>
+                    <div class="alunos">
+                      <img src="assets/images/cursos/icon-alunos.png" alt="Alunos">
+                      <span>Número de alunos por curso</span><br>
+                      <span>25 alunos</span>
+                    </div>
+                  </div>
+                    <hr/>
+                    <div class="botoes">
+                      <ul class="loginDesk">
+                        <li><a href="#">Inscreva-se</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <!--// line modal -->
+          </div>
+          <!---// bloco curso -->
+
+
+        </div>
+      </section>
+    </div>
+  </div>
+
+
+   <!--Na Midia-->
+   <div class="container-fluid bgColor hidden" session="namidia">
+     <div class="container naMidia">
+       <section class="BuscaNaMidia">
+         <div class="row">
+          <h3>Na Mídia</h3>
+          <h4>Resultado para: "Lorem ispum dolor"</h4>
+          <h5>Foram encontrados 150 notícias - Mostrando 50 de 100.</h5>
+            <!-- bloco - Na Midia -->
+            <div class="col-md-4 col-sm-6">
+              <div class="card hovercard">
+                <div class="cardheader">
+                  <img src="assets/images/na-midia/img-media-2.png" alt="">
+                </div>
+                <div class="info">
+                  <div class="publicado2">
+                      Publicado em 01/05/2017
+                  </div>
+                  <div class="desc"><strong>Lorem ipsum dolor sit amet dolor sit ipsum dolor sit amet dolor sit </strong></div>
+                  <div class="desc2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id rhoncus nunc, sed euismod nulla. Sed gravida turpis ut sagittis pharetra. Cras varius pretium quam et fermentum. Vestibulum placerat vel purus at lobortis. Suspendisse sed maximus nulla. </div>
+                </div>
+                <div class="bottom">
+                  <a href="http://www.facebook.com/share.php?u=http://www2.correios.com.br/servicos/achados_perdidos/default.cfm&achadeeperdidos" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="assets/images/na-midia/icon-face.png" alt="Facebook"></a>
+                  <a href="https://plus.google.com/share?url={http://www2.correios.com.br/servicos/achados_perdidos/default.cfm}" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="assets/images/na-midia/icon-gplus.png" alt="Google Plus"></a>
+                  <a href="http://www.twitter.com/share?url=http://www2.correios.com.br/servicos/achados_perdidos/default.cfm" target="_blank" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="assets/images/na-midia/icon-twiiter.png" alt="Twitter"></a>
+                  <a href="detalhe-da-materia.php" class="btnVerPage pull-right">Ver <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                </div>
+              </div>
+            </div>
+            <!-- //bloco - Na Midia -->
+            <!-- bloco - Na Midia -->
+            <div class="col-md-4 col-sm-6">
+              <div class="card hovercard">
+                <div class="cardheader">
+                  <img src="assets/images/na-midia/img-media-2.png" alt="">
+                </div>
+                <div class="info">
+                  <div class="publicado2">
+                      Publicado em 01/05/2017
+                  </div>
+                  <div class="desc"><strong>Lorem ipsum dolor sit amet dolor sit ipsum dolor sit amet dolor sit </strong></div>
+                  <div class="desc2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id rhoncus nunc, sed euismod nulla. Sed gravida turpis ut sagittis pharetra. Cras varius pretium quam et fermentum. Vestibulum placerat vel purus at lobortis. Suspendisse sed maximus nulla. </div>
+                </div>
+                <div class="bottom">
+                  <a href="http://www.facebook.com/share.php?u=http://www2.correios.com.br/servicos/achados_perdidos/default.cfm&achadeeperdidos" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="assets/images/na-midia/icon-face.png" alt="Facebook"></a>
+                  <a href="https://plus.google.com/share?url={http://www2.correios.com.br/servicos/achados_perdidos/default.cfm}" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="assets/images/na-midia/icon-gplus.png" alt="Google Plus"></a>
+                  <a href="http://www.twitter.com/share?url=http://www2.correios.com.br/servicos/achados_perdidos/default.cfm" target="_blank" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="assets/images/na-midia/icon-twiiter.png" alt="Twitter"></a>
+                  <a href="detalhe-da-materia.php" class="btnVerPage pull-right">Ver <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                </div>
+              </div>
+            </div>
+            <!-- //bloco - Na Midia -->
+            <!-- bloco - Na Midia -->
+            <div class="col-md-4 col-sm-6">
+              <div class="card hovercard">
+                <div class="cardheader">
+                  <img src="assets/images/na-midia/img-media-2.png" alt="">
+                </div>
+                <div class="info">
+                  <div class="publicado2">
+                      Publicado em 01/05/2017
+                  </div>
+                  <div class="desc"><strong>Lorem ipsum dolor sit amet dolor sit ipsum dolor sit amet dolor sit </strong></div>
+                  <div class="desc2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id rhoncus nunc, sed euismod nulla. Sed gravida turpis ut sagittis pharetra. Cras varius pretium quam et fermentum. Vestibulum placerat vel purus at lobortis. Suspendisse sed maximus nulla. </div>
+                </div>
+                <div class="bottom">
+                  <a href="http://www.facebook.com/share.php?u=http://www2.correios.com.br/servicos/achados_perdidos/default.cfm&achadeeperdidos" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="assets/images/na-midia/icon-face.png" alt="Facebook"></a>
+                  <a href="https://plus.google.com/share?url={http://www2.correios.com.br/servicos/achados_perdidos/default.cfm}" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="assets/images/na-midia/icon-gplus.png" alt="Google Plus"></a>
+                  <a href="http://www.twitter.com/share?url=http://www2.correios.com.br/servicos/achados_perdidos/default.cfm" target="_blank" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="assets/images/na-midia/icon-twiiter.png" alt="Twitter"></a>
+                  <a href="detalhe-da-materia.php" class="btnVerPage pull-right">Ver <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                </div>
+              </div>
+            </div>
+            <!-- //bloco - Na Midia -->
+           <!-- bloco - Na Midia -->
+            <div class="col-md-4 col-sm-6">
+              <div class="card hovercard">
+                <div class="cardheader">
+                  <img src="assets/images/na-midia/img-media-2.png" alt="">
+                </div>
+                <div class="info">
+                  <div class="publicado2">
+                      Publicado em 01/05/2017
+                  </div>
+                  <div class="desc"><strong>Lorem ipsum dolor sit amet dolor sit ipsum dolor sit amet dolor sit </strong></div>
+                  <div class="desc2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id rhoncus nunc, sed euismod nulla. Sed gravida turpis ut sagittis pharetra. Cras varius pretium quam et fermentum. Vestibulum placerat vel purus at lobortis. Suspendisse sed maximus nulla. </div>
+                </div>
+                <div class="bottom">
+                  <a href="http://www.facebook.com/share.php?u=http://www2.correios.com.br/servicos/achados_perdidos/default.cfm&achadeeperdidos" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="assets/images/na-midia/icon-face.png" alt="Facebook"></a>
+                  <a href="https://plus.google.com/share?url={http://www2.correios.com.br/servicos/achados_perdidos/default.cfm}" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="assets/images/na-midia/icon-gplus.png" alt="Google Plus"></a>
+                  <a href="http://www.twitter.com/share?url=http://www2.correios.com.br/servicos/achados_perdidos/default.cfm" target="_blank" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="assets/images/na-midia/icon-twiiter.png" alt="Twitter"></a>
+                  <a href="detalhe-da-materia.php" class="btnVerPage pull-right">Ver <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                </div>
+              </div>
+            </div>
+            <!-- //bloco - Na Midia -->
+        </div>
+       </section>
+     </div>
+ </div>
+  <div class="row">
+      <div class="text-center">
+        <ul class="pagination pagination-large" id="ulPagination"> 
+      </ul>
+      </div>
+  </div>
+</div>
+
+    <footer>
+      <div class="container-fluid bgFooter">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <img src="assets/images/footer/logo-projeto.png" alt="Logo"/>
+            </div>
+            <div class="col-md-5 col-sm-6 col-xs-12">
+              <h2>Sobre</h2>
+              <ul>
+                <div class="col-md-4 col-sm-6 col-xs-6">
+                  <li><a href="#">Institucional</a></li>
+                  <li><a href="#">Dúvidas</a></li>
+                  <li><a href="#">Na Mídia</a></li>
+                  <li><a href="#">Contato</a></li>
+                </div>
+                <div class="col-md-5 col-sm-6 col-xs-6">
+                  <li><a href="#">Publicações</a></li>
+                  <li><a href="#">Pedidos</a></li>
+                  <li><a href="#">Dados</a></li>
+                  <li><a href="#">Cursos</a></li>
+                </div>
+              </ul>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12 pull-right">
+              <div class="redesSociais">
+                <a href="#" target="_blank"><img src="assets/images/footer/twitter.jpg" alt="Twitter"/></a>
+                <a href="#" target="_blank"><img src="assets/images/footer/facebook.jpg" alt="Facebook"/></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+       
+        <div class="row last">
+          <div class="col-md-1 col-sm-12 col-xs-12 no-gutter-left">
+            <img src="assets/images/footer/logo-creative.jpg" alt="creative" class="ImgCreative"/>
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="politica">
+            <p>
+              Todo o nosso conteúdo pode ser publicado ou reutilizados de forma gratuita, exceto para a maioria das fotografias, ilustrações e vídeos.</p>
+              <a href="politica-de-uso.php"><strong>Política de Uso</strong></a><span>e</span>  <a href="termos-de-privacidade.php"><strong>Termos de Privacidade</strong></a>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-12 col-xs-12 copyright no-gutter-right">
+            <p>2016 © Achados e Pedidos.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- line modal -->
+    <div class="modal-warning modal fade" id="modalnaologado" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              <span aria-hidden="true">
+              <img src="assets/images/cursos/fechar.png" alt="Fechar"></span>
+              <span class="sr-only">Close</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- content goes here -->
+            <div class="box">
+              <img src="assets/images/geral/warning.png" alt="Espere!">
+              <p class="warning-title">Esta ação requer login</p>
+              <p>Você precisa se logar no site para fazer essa ação.</p>
+              <div class="col-sm-12">
+                <div class="bntVerMais"><a href="login.php">Fazer login</a></div>
+              </div>
+              <a href="cadastro.php">Não tenho login, quero me cadastrar.</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--// line modal -->
+
+    <!-- Deferred JavaScript -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="assets/js/public.js"></script>
+    <script type="text/javascript" src="assets/js/wow/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+    <script src="assets/js/bootstrap-filestyle.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="assets/js/busca.js"></script>
+    
+  </body>
+</html>
+
+

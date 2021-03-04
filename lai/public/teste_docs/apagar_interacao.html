@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <title>Apagar Interação</title>
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td>codigo_interacao</td>
+                <td><input type="text" id="codigo_interacao"></td>
+            </tr>
+            <tr><td colspan="2"><input type="button" id="btnApagar" value="Apagar"></td></tr>
+        </table>
+    </body>
+</html>
+
+<script>
+
+
+$(function () {
+
+    $(document).ready(function () {
+        $( "#btnApagar" ).click(function() {
+            apagar();
+        });        
+    });
+
+    function apagar() {
+
+        var urlApi = '/api/interacoes/apagar/' + $('#codigo_interacao').val();
+
+        $.ajax(urlApi, {
+            method: "DELETE",
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: "json",
+            success: function (result) {
+                alert("Interação apagada");
+            },
+            error: function (err) {
+                alert("Erro");
+            }
+        });
+    }
+
+});
+
+</script>

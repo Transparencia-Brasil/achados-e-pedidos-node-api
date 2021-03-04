@@ -1,0 +1,200 @@
+
+
+//segregado
+
+
+PUT /pedidos/
+PUT /interacoes/
+PUT /anexos/
+{  
+   "index":{  
+      "analysis":{  
+         "analyzer":{  
+            "index_analyzer":{  
+               "filter":[  
+                  "standard",
+                  "lowercase",
+                  "asciifolding"
+               ],
+               "tokenizer":"standard"
+            },
+            "search_analyzer":{  
+               "filter":[  
+                  "standard",
+                  "lowercase",
+                  "asciifolding"
+               ],
+               "tokenizer":"standard"
+            },
+            "sortable":{  
+               "filter":"lowercaseFilter",
+               "tokenizer":"keyword",
+               "type":"custom"
+            }
+         },
+         "filter":{  
+            "lowercaseFilter":{  
+               "type":"lowercase"
+            }
+         },
+         "tokenizer":{  
+            "keyword":{  
+               "type":"keyword"
+            }
+         }
+      }
+   }
+}
+
+
+PUT /pedidos/
+PUT /interacoes/
+PUT /pedidos/
+{  
+   "index":{  
+      "analysis":{  
+         "analyzer":{  
+            "index_analyzer":{  
+               "filter":[  
+                  "standard",
+                  "lowercase",
+                  "asciifolding"
+               ],
+               "tokenizer":"standard"
+            },
+            "search_analyzer":{  
+               "filter":[  
+                  "standard",
+                  "lowercase",
+                  "asciifolding"
+               ],
+               "tokenizer":"standard"
+            }
+         }
+      }
+   }
+}
+
+       
+
+
+PUT /pedidos/_mapping/data
+{
+    "properties": {
+	"pedidos_codigo_local": { "type": "integer"},
+        //2017-01-22 Paulo Campos: Comentado
+        //"pedidos_codigo_local": { "type": "integer", "fielddata": true },
+	"usuarios_codigo_local": { "type": "integer" },
+        "usuarios_nome_local": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "usuarios_email_local": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "agentes_codigo_local": { "type": "integer" },
+        "agentes_nome_local": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "tipo_pedido_situacao_codigo_local": { "type": "integer" },
+        "tipo_pedido_situacao_nome_local": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "status_pedido_codigo_local": { "type": "integer" },
+        "status_pedido_nome_local": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "status_pedido_interno_codigo_local": { "type": "integer" },
+        "status_pedido_interno_nome_local": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "tipo_pedido_origem_codigo_local": { "type": "integer" },
+        "tipo_pedido_origem_nome_local": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "tipo_poder_codigo_local": { "type": "integer" },
+        "tipo_poder_nome_local": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "tipo_nivel_federativo_codigo_local": { "type": "integer" },
+        "tipo_nivel_federativo_nome_local": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "pedidos_protocolo_local": { "type": "string", "index":    "not_analyzed" },
+        "pedidos_titulo_local": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "pedidos_slug_local": { "type": "string", "index":    "not_analyzed" },
+        "pedidos_descricao_local": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "pedidos_enviado_para_local": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "pedidos_data_envio_local": { "type":   "date", "format": "yyyy-MM-dd" },
+        "pedidos_foi_prorrogado_local": { "type": "boolean" },
+        "pedidos_anonimo_local": { "type": "boolean" },
+        "tipo_pedidos_resposta_codigo": { "type": "integer" },
+        "tipo_pedidos_resposta_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" } 
+    }
+}
+
+
+
+
+PUT /interacoes/_mapping/data
+{
+    "properties": {
+
+        "pedidos_codigo": { "type": "integer" },
+        "usuarios_codigo": { "type": "integer" },
+        "usuarios_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "usuarios_email": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "agentes_codigo": { "type": "integer" },
+        "agentes_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "tipo_pedido_situacao_codigo": { "type": "integer" },
+        "tipo_pedido_situacao_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "status_pedido_codigo": { "type": "integer" },
+        "status_pedido_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "status_pedido_interno_codigo": { "type": "integer" },
+        "status_pedido_interno_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "tipo_pedido_origem_codigo": { "type": "integer" },
+        "tipo_pedido_origem_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "tipo_poder_codigo": { "type": "integer" },
+        "tipo_poder_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "tipo_nivel_federativo_codigo": { "type": "integer" },
+        "tipo_nivel_federativo_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "pedidos_protocolo": { "type": "string", "index":    "not_analyzed" },
+        "pedidos_titulo": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "pedidos_slug": { "type": "string", "index":    "not_analyzed" },
+        "pedidos_descricao": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "pedidos_enviado_para": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "pedidos_data_envio": { "type":   "date", "format": "yyyy-MM-dd" },
+        "pedidos_foi_prorrogado": { "type": "boolean" },
+        "pedidos_anonimo": { "type": "boolean" },
+        "interacoes_codigo_local": { "type": "integer" },
+        "tipo_pedidos_resposta_codigo_local": { "type": "integer" },
+        "tipo_pedidos_resposta_nome_local": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "interacoes_descricao_local": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "interacoes_data_resposta_local": { "type":   "date", "format": "yyyy-MM-dd" }
+    }
+}
+
+
+PUT /anexos/_mapping/data
+{
+    "properties": {
+        "pedidos_codigo": { "type": "integer" },
+        "usuarios_codigo": { "type": "integer" },
+        "usuarios_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "usuarios_email": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "agentes_codigo": { "type": "integer" },
+        "agentes_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "tipo_pedido_situacao_codigo": { "type": "integer" },
+        "tipo_pedido_situacao_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "status_pedido_codigo": { "type": "integer" },
+        "status_pedido_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "status_pedido_interno_codigo": { "type": "integer" },
+        "status_pedido_interno_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "tipo_pedido_origem_codigo": { "type": "integer" },
+        "tipo_pedido_origem_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "tipo_poder_codigo": { "type": "integer" },
+        "tipo_poder_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "tipo_nivel_federativo_codigo": { "type": "integer" },
+        "tipo_nivel_federativo_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+
+        "pedidos_protocolo": { "type": "string", "index":    "not_analyzed" },
+        "pedidos_titulo": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "pedidos_slug": { "type": "string", "index":    "not_analyzed" },
+        "pedidos_descricao": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "pedidos_enviado_para": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "pedidos_data_envio": { "type":   "date", "format": "yyyy-MM-dd" },
+        "pedidos_foi_prorrogado": { "type": "boolean" },
+        "pedidos_anonimo": { "type": "boolean" },
+
+        "interacoes_codigo": { "type": "integer" },
+        "tipo_pedidos_resposta_codigo": { "type": "integer" },
+        "tipo_pedidos_resposta_nome": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "interacoes_descricao": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" },
+        "interacoes_data_resposta": { "type":   "date", "format": "yyyy-MM-dd" },
+
+        "anexos_codigo": { "type": "integer" },
+        "anexos_arquivo": { "type": "string", "index":    "not_analyzed" },
+        "anexos_conteudo_arquivo": { "type": "string", "analyzer": "index_analyzer", "search_analyzer": "search_analyzer" }
+    }
+}
