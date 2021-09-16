@@ -39,6 +39,32 @@
 
         },
 
+        
+        gravarVarios: function(anexos, callback) {
+
+            var client = new elasticsearch.Client({
+                host: 'localhost:9200'
+                // log: 'trace'
+            });
+
+            var items=[];
+            anexos.forEach(element => {
+                items.push({ index:  { _index: 'anexos', _type: 'data', _id: element.anexos_codigo }},element);
+            });
+
+            client.bulk({
+                body: items
+            },
+            function (error, response) {
+
+                if (error) return callback(error);
+
+                return callback(null, response);
+
+            });
+
+        },
+
         gravar: function(anexo, callback) {
 
             var client = new elasticsearch.Client({
@@ -125,6 +151,26 @@
                         multi_match : {
                             query:    value, 
                             fields: [ "anexos_arquivo", "anexos_conteudo_arquivo" ] 
+                        }
+                    }
+                }
+            }, function (error, response) {
+                if (error) return callback(error);
+                return callback(null, response);
+            });
+
+        },
+
+        consultarPorCodigo: function(value, callback) {
+
+            client.search({
+                index: 'anexos',
+                type: 'data',
+                body: {
+                    query : {
+                        multi_match : {
+                            query:    value, 
+                            fields: [ "anexos_codigo" ] 
                         }
                     }
                 }

@@ -58,6 +58,27 @@
            
         },
 
+        gravarVarios: function(req, res, next) {
+
+            var dataSet = [];
+
+            req.body.forEach(element => {
+                var a = anexoService.preencheModel(element.anexos_codigo, element);
+
+                dataSet.push(a);
+            });
+
+         
+            anexo.gravarVarios(dataSet, function (err, result) {   
+                if (err) {
+                    return res.status(err.status).send({"result": "error", message: err.message});
+                } else {
+                    return res.json({"success": true});
+                }
+            });
+
+        },
+
         gravar: function(req, res, next) {
 
             var pedidos_codigo      = req.body.pedidos_codigo;
@@ -224,6 +245,36 @@
                     return res.status(err.status).send( { 'success' : false, 'message' : err.message});
                 } else {
                     return res.json(result._source);
+                }
+
+            });
+           
+        },
+
+        consultarPorCodigo: function(req, res, next) {
+
+            var codigo = req.params.codigo;
+
+            if (!isNumeric(codigo)) {
+                return res.status(404).send({ 
+                    error : {
+                        source    : 'controller',
+                        message   : 'O código na rota é obrigatório e numérico. Ex: /api/anexos/buscar/99999'
+                    } 
+                });
+            }
+
+            anexo.consultarPorCodigo(codigo, function (err, result) {
+
+                if (err) {
+                    return res.status(err.status).send( { 'success' : false, 'message' : err.message});
+                } else {
+                    if(result.hits.total > 0) {
+                        return res.json(result.hits.hits[0]._source);
+                    }
+                    else {
+                        return res.status(404).send( { 'success' : false, 'message' : 'Nao encontrado'});
+                    }
                 }
 
             });
