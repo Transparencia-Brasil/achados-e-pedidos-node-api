@@ -18,8 +18,8 @@ app.set('superSecret', config.secret); // secret variable
 app.use(express.static(__dirname + '/public'));     // set the static files location /public/img will be /img for users
 
 // use body parser so we can get info from POST and/or URL parameters
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json({ limit: '16mb' }));
+app.use(bodyParser.urlencoded({limit: '200mb',  extended: true }));
+app.use(bodyParser.json({limit: '200mb'}));
 
 // use morgan to log requests to the console
 app.use(morgan('dev'));
