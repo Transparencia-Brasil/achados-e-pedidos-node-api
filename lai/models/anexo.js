@@ -136,18 +136,17 @@
         },
 
         contarTodos: function(callback) {
-            client.search({
+            client.count({
                 index: 'anexos',
                 type: 'data',
                 body: {
                     query : {
                         match_all : { }
-                    },
-                    size: 10
+                    }
                 }
             }, function (error, response) {
                 if (error) return callback(error);
-                return callback(null, response.hits.total);
+                return callback(null, response.count);
             });
 
         },
