@@ -28,6 +28,12 @@
 		router.route('/anexos/consultar/')
 			.post(anexoController.consultar);
 		
+		router.route('/anexos/listar/')
+			.post(anexoController.listar);
+
+		router.route('/anexos/listarconteudo/')
+			.get(anexoController.listarconteudo);
+		
 		router.route('/anexos/consultar/:codigo')
 			.get(anexoController.consultarPorId);
 

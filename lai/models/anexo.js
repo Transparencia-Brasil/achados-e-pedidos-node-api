@@ -38,7 +38,6 @@
             });
 
         },
-
         
         gravarVarios: function(anexos, callback) {
 
@@ -126,7 +125,7 @@
             client.count({
                 index: 'anexos',
                 type: 'data',
-                body: {
+                body: {                    
                     query : {
                         multi_match : {
                             query:    value, 
@@ -192,7 +191,58 @@
                 return callback(null, response);
             });
 
-        }
+        },
+
+        contarTodos: function(callback) {
+            client.search({
+                index: 'anexos',
+                type: 'data',
+                body: {
+                    query : {
+                        match_all : { }
+                    },
+                    size: 10
+                }
+            }, function (error, response) {
+                if (error) return callback(error);
+                return callback(null, response.hits.total);
+            });
+
+        },
+
+        listar:  function(callback) {
+            client.search({
+                index: 'anexos',
+                type: 'data',
+                body: {
+                    query : {
+                        match_all : { }
+                    }
+                }
+            }, function (error, response) {
+                if (error) return callback(error);
+                return callback(null, response);
+            });
+
+        },
+
+        listarconteudo:  function(callback, from, size) {
+            client.search({
+                index: 'anexos',
+                type: 'data',
+                body: {
+                    size: size,
+                    from: from,
+                    query : {
+                        match_all : { }
+                    }
+                }
+            }, function (error, response) {
+                if (error) return callback(error);
+                return callback(null, response);
+            });
+
+        },
 
     } 
 
