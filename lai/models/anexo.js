@@ -169,7 +169,7 @@
                     query : {
                         multi_match : {
                             query:    value, 
-                            fields: [ "anexos_codigo" ] 
+                            fields: [ "anexos_codigo", "anexos_conteudo_arquivo" ] 
                         }
                     }
                 }
