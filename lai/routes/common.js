@@ -8,7 +8,7 @@
 		var commonController = require('../controllers/commonController');
         
 		router.route('/teste/')
-			.get(commonController.contar);
+			.get(commonController.teste);
 
         router.route('/contar/')
 			.post(commonController.contar);

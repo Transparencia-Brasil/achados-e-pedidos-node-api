@@ -16,6 +16,78 @@
 
     module.exports = {
 
+        teste: function(req, res, next) {
+
+            var value = "pedidos";
+            if (value) {
+
+                async.parallel({
+
+                    pedidos: function(callback) {
+                        
+                        pedido.contar(value, function (err, result) {
+
+                            if (err) {
+                                console.log(err);
+                                return res.status(err.status).send({"success": false, message: err.message});
+                            } else {
+                                return callback(null, result);
+                            }
+
+                        });
+                        
+                    },
+
+                    interacoes: function(callback) {
+                        
+                        interacao.contar(value, function (err, result) {
+
+                            if (err) {
+                                console.log(err);
+                                return res.status(err.status).send({"success": false, message: err.message});
+                            } else {
+                                return callback(null, result);
+                            }
+
+                        });
+                        
+                    },
+
+                    anexos: function(callback) {
+                        
+                        anexo.contar(value, function (err, result) {
+
+                            if (err) {
+                                console.log(err);
+                                return res.status(err.status).send({"success": false, message: err.message});
+                            } else {
+                                return callback(null, result);
+                            }
+
+                        });
+                        
+                    }
+
+                }, function(err, results) {
+                    // results is now equals to: {one: 1, two: 2}
+
+                    if (err) return res.status(500).send({"success": false, message: err});
+
+                    return res.json(results);
+
+                });
+
+            } else {
+
+                return res.status(404).send({ 
+                    error : {
+                        source    : 'controller',
+                        message   : 'O campo value é obrigatório.'
+                    } 
+                });
+
+            }
+        },
         contar: function(req, res, next) {
 
             var value = req.body.value;
