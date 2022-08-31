@@ -38,6 +38,31 @@
             });
 
         },
+        
+        gravarVarios: function(anexos, callback) {
+
+            var client = new elasticsearch.Client({
+                host: 'localhost:9200'
+                // log: 'trace'
+            });
+
+            var items=[];
+            anexos.forEach(element => {
+                items.push({ index:  { _index: 'anexos', _type: 'data', _id: element.anexos_codigo }},element);
+            });
+
+            client.bulk({
+                body: items
+            },
+            function (error, response) {
+
+                if (error) return callback(error);
+
+                return callback(null, response);
+
+            });
+
+        },
 
         gravar: function(anexo, callback) {
 
@@ -100,7 +125,7 @@
             client.count({
                 index: 'anexos',
                 type: 'data',
-                body: {
+                body: {                    
                     query : {
                         multi_match : {
                             query:    value, 
@@ -134,6 +159,26 @@
             });
 
         },
+
+        consultarPorCodigo: function(value, callback) {
+
+            client.search({
+                index: 'anexos',
+                type: 'data',
+                body: {
+                    query : {
+                        multi_match : {
+                            query:    value, 
+                            fields: [ "anexos_codigo", "anexos_conteudo_arquivo" ] 
+                        }
+                    }
+                }
+            }, function (error, response) {
+                if (error) return callback(error);
+                return callback(null, response);
+            });
+
+        },
         
         consultarPorId: function(codigo, callback) {
 
@@ -146,7 +191,57 @@
                 return callback(null, response);
             });
 
-        }
+        },
+
+        contarTodos: function(callback) {
+            client.count({
+                index: 'anexos',
+                type: 'data',
+                body: {
+                    query : {
+                        match_all : { }
+                    }
+                }
+            }, function (error, response) {
+                if (error) return callback(error);
+                return callback(null, response.count);
+            });
+
+        },
+
+        listar:  function(callback) {
+            client.search({
+                index: 'anexos',
+                type: 'data',
+                body: {
+                    query : {
+                        match_all : { }
+                    }
+                }
+            }, function (error, response) {
+                if (error) return callback(error);
+                return callback(null, response);
+            });
+
+        },
+
+        listarconteudo:  function(callback, from, size) {
+            client.search({
+                index: 'anexos',
+                type: 'data',
+                body: {
+                    size: size,
+                    from: from,
+                    query : {
+                        match_all : { }
+                    }
+                }
+            }, function (error, response) {
+                if (error) return callback(error);
+                return callback(null, response);
+            });
+
+        },
 
     } 
 

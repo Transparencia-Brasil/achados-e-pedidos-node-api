@@ -13,6 +13,9 @@
 		router.route('/anexos/gravar/:codigo')
 			.put(anexoController.gravar);
 
+		router.route('/anexos/gravar-varios/')
+			.put(anexoController.gravarVarios);
+
 		router.route('/anexos/extractor-update/:codigo/')
 			.put(anexoController.extractorUpdate);
 
@@ -25,8 +28,17 @@
 		router.route('/anexos/consultar/')
 			.post(anexoController.consultar);
 		
+		router.route('/anexos/listar/')
+			.post(anexoController.listar);
+
+		router.route('/anexos/listarconteudo/')
+			.get(anexoController.listarconteudo);
+		
 		router.route('/anexos/consultar/:codigo')
 			.get(anexoController.consultarPorId);
+
+		router.route('/anexos/buscar/:codigo')
+			.get(anexoController.consultarPorCodigo);
 
 		app.use('/api', router);
 		
