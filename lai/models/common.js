@@ -1,10 +1,10 @@
-(function () {
+(function() {
 
-	var _               = require('underscore'); 
-    var elasticsearch   = require('elasticsearch');
-    var async           = require('async');
-    var config          = require('../config.js');
-    var loggerService   = require('../services/loggerService.js');
+    var _ = require('underscore');
+    var elasticsearch = require('elasticsearch');
+    var async = require('async');
+    var config = require('../config.js');
+    var loggerService = require('../services/loggerService.js');
 
     var client = new elasticsearch.Client({
         host: 'localhost:9200',
@@ -20,22 +20,31 @@
                 index: ['pedidos', 'interacoes', 'anexos'],
                 type: 'data',
                 body: {
-                    query : {
-                        bool : {
-                            should : [
-                                { match: { "anexos_conteudo_arquivo" : value } },
-                                { match: { "interacoes_descricao_local" : value } },
-                                { match: { "pedidos_titulo_local" : value } },
-                                { match: { "pedidos_descricao_local" : value } }
+                    query: {
+                        bool: {
+                            should: [
+                                { match: { "anexos_conteudo_arquivo": value } },
+                                { match: { "interacoes_descricao_local": value } },
+                                { match: { "pedidos_titulo_local": value } },
+                                { match: { "pedidos_descricao_local": value } }
                             ]
                         }
                     }
                 }
-            }, function (error, response) {
+            }, function(error, response) {
                 if (error) return callback(error);
                 return callback(null, response);
             });
 
+        },
+
+        forceMerge: function(callback) {
+            client.indices.forcemerge({
+                index: ['pedidos', 'interacoes', 'anexos']
+            }, function(error, response) {
+                if (error) return callback(error);
+                return callback(null, response);
+            });
         },
 
         consultar: function(data, from, callback) {
@@ -53,34 +62,34 @@
             var p1 = {};
             p1.bool = {};
             p1.bool.must = [];
-            p1.bool.must.push( { match : { pedidos_titulo_local : data.value } } );
-            
+            p1.bool.must.push({ match: { pedidos_titulo_local: data.value } });
+
             var p2 = {};
             p2.bool = {};
             p2.bool.must = [];
-            p2.bool.must.push( { match : { pedidos_descricao_local : data.value } } );
+            p2.bool.must.push({ match: { pedidos_descricao_local: data.value } });
 
 
             var i = {};
             i.bool = {};
             i.bool.must = [];
-            i.bool.must.push( { match : { interacoes_descricao_local : data.value } } );
+            i.bool.must.push({ match: { interacoes_descricao_local: data.value } });
 
 
             var a = {};
             a.bool = {};
             a.bool.must = [];
-            a.bool.must.push( { match : { anexos_conteudo_arquivo : data.value } } );
+            a.bool.must.push({ match: { anexos_conteudo_arquivo: data.value } });
 
             if (data.dataDe && data.dataAte) {
-                p1.bool.must.push( { range: { "pedidos_data_envio_local" : { "gte" : data.dataDe }}} );
-                p1.bool.must.push( { range: { "pedidos_data_envio_local" : { "lt" : data.dataAte }}} );
-                p2.bool.must.push( { range: { "pedidos_data_envio_local" : { "gte" : data.dataDe }}} );
-                p2.bool.must.push( { range: { "pedidos_data_envio_local" : { "lt" : data.dataAte }}} );
-                i.bool.must.push( { range: { "pedidos_data_envio" : { "gte" : data.dataDe }}} );
-                i.bool.must.push( { range: { "pedidos_data_envio" : { "lt" : data.dataAte }}} );
-                a.bool.must.push( { range: { "pedidos_data_envio" : { "gte" : data.dataDe }}} );
-                a.bool.must.push( { range: { "pedidos_data_envio" : { "lt" : data.dataAte }}} );
+                p1.bool.must.push({ range: { "pedidos_data_envio_local": { "gte": data.dataDe } } });
+                p1.bool.must.push({ range: { "pedidos_data_envio_local": { "lt": data.dataAte } } });
+                p2.bool.must.push({ range: { "pedidos_data_envio_local": { "gte": data.dataDe } } });
+                p2.bool.must.push({ range: { "pedidos_data_envio_local": { "lt": data.dataAte } } });
+                i.bool.must.push({ range: { "pedidos_data_envio": { "gte": data.dataDe } } });
+                i.bool.must.push({ range: { "pedidos_data_envio": { "lt": data.dataAte } } });
+                a.bool.must.push({ range: { "pedidos_data_envio": { "gte": data.dataDe } } });
+                a.bool.must.push({ range: { "pedidos_data_envio": { "lt": data.dataAte } } });
             }
 
             p1.bool.filter = [];
@@ -96,21 +105,21 @@
 
             if (data.chkEmTramitacao == 'true') {
                 tipo_pedido_situacao.push(1);
-            } 
+            }
             if (data.chkFinalizada == 'true') {
                 tipo_pedido_situacao.push(2);
-            } 
+            }
 
             //2017-10-02 Paulo Campos: Adicionado filtro 
             if (data.chkNaoObteveResposta == 'true') {
                 tipo_pedido_situacao.push(3);
-            } 
-
-            if (data.chkPedidosRecursoSim == 'true' ) {
-                tipo_pedido_resposta = [4,5,6,7,8,9,10,11];
             }
-            if (data.chkPedidosRecursoNao == 'true' ) {
-                tipo_pedido_resposta = [1,2,3];
+
+            if (data.chkPedidosRecursoSim == 'true') {
+                tipo_pedido_resposta = [4, 5, 6, 7, 8, 9, 10, 11];
+            }
+            if (data.chkPedidosRecursoNao == 'true') {
+                tipo_pedido_resposta = [1, 2, 3];
             }
 
             if (data.chkAtendido == 'true') {
@@ -148,38 +157,38 @@
 
 
             if (tipo_pedido_situacao.length > 0) {
-                p1.bool.filter.push( { terms : { tipo_pedido_situacao_codigo_local : tipo_pedido_situacao } } );
-                p2.bool.filter.push( { terms : { tipo_pedido_situacao_codigo_local : tipo_pedido_situacao } } );
-                i.bool.filter.push( { terms : { tipo_pedido_situacao_codigo : tipo_pedido_situacao } } );
-                a.bool.filter.push( { terms : { tipo_pedido_situacao_codigo : tipo_pedido_situacao } } );
+                p1.bool.filter.push({ terms: { tipo_pedido_situacao_codigo_local: tipo_pedido_situacao } });
+                p2.bool.filter.push({ terms: { tipo_pedido_situacao_codigo_local: tipo_pedido_situacao } });
+                i.bool.filter.push({ terms: { tipo_pedido_situacao_codigo: tipo_pedido_situacao } });
+                a.bool.filter.push({ terms: { tipo_pedido_situacao_codigo: tipo_pedido_situacao } });
             }
 
             if (tipo_pedido_resposta.length > 0) {
-                p1.bool.filter.push( { terms : { tipo_pedidos_resposta_codigo : tipo_pedido_resposta } } );
-                p2.bool.filter.push( { terms : { tipo_pedidos_resposta_codigo : tipo_pedido_resposta } } );
-                i.bool.filter.push( { terms : { tipo_pedidos_resposta_codigo_local : tipo_pedido_resposta } } );
-                a.bool.filter.push( { terms : { tipo_pedidos_resposta_codigo : tipo_pedido_resposta } } );
+                p1.bool.filter.push({ terms: { tipo_pedidos_resposta_codigo: tipo_pedido_resposta } });
+                p2.bool.filter.push({ terms: { tipo_pedidos_resposta_codigo: tipo_pedido_resposta } });
+                i.bool.filter.push({ terms: { tipo_pedidos_resposta_codigo_local: tipo_pedido_resposta } });
+                a.bool.filter.push({ terms: { tipo_pedidos_resposta_codigo: tipo_pedido_resposta } });
             }
 
             if (status_pedido.length > 0) {
-                p1.bool.filter.push( { terms : { status_pedido_codigo_local : status_pedido } } );
-                p2.bool.filter.push( { terms : { status_pedido_codigo_local : status_pedido } } );
-                i.bool.filter.push( { terms : { status_pedido_codigo : status_pedido } } );
-                a.bool.filter.push( { terms : { status_pedido_codigo : status_pedido } } );
+                p1.bool.filter.push({ terms: { status_pedido_codigo_local: status_pedido } });
+                p2.bool.filter.push({ terms: { status_pedido_codigo_local: status_pedido } });
+                i.bool.filter.push({ terms: { status_pedido_codigo: status_pedido } });
+                a.bool.filter.push({ terms: { status_pedido_codigo: status_pedido } });
             }
 
             if (tipo_nivel_federativo.length > 0) {
-                p1.bool.filter.push( { terms : { tipo_nivel_federativo_codigo_local : tipo_nivel_federativo } } );
-                p2.bool.filter.push( { terms : { tipo_nivel_federativo_codigo_local : tipo_nivel_federativo } } );
-                i.bool.filter.push( { terms : { tipo_nivel_federativo_codigo : tipo_nivel_federativo } } );
-                a.bool.filter.push( { terms : { tipo_nivel_federativo_codigo : tipo_nivel_federativo } } );
+                p1.bool.filter.push({ terms: { tipo_nivel_federativo_codigo_local: tipo_nivel_federativo } });
+                p2.bool.filter.push({ terms: { tipo_nivel_federativo_codigo_local: tipo_nivel_federativo } });
+                i.bool.filter.push({ terms: { tipo_nivel_federativo_codigo: tipo_nivel_federativo } });
+                a.bool.filter.push({ terms: { tipo_nivel_federativo_codigo: tipo_nivel_federativo } });
             }
 
             if (tipo_poder.length > 0) {
-                p1.bool.filter.push( { terms : { tipo_poder_codigo_local : tipo_poder } } );
-                p2.bool.filter.push( { terms : { tipo_poder_codigo_local : tipo_poder } } );
-                i.bool.filter.push( { terms : { tipo_poder_codigo : tipo_poder } } );
-                a.bool.filter.push( { terms : { tipo_poder_codigo : tipo_poder } } );
+                p1.bool.filter.push({ terms: { tipo_poder_codigo_local: tipo_poder } });
+                p2.bool.filter.push({ terms: { tipo_poder_codigo_local: tipo_poder } });
+                i.bool.filter.push({ terms: { tipo_poder_codigo: tipo_poder } });
+                a.bool.filter.push({ terms: { tipo_poder_codigo: tipo_poder } });
             }
 
             query.bool.should.push(p1);
@@ -190,20 +199,20 @@
             client.search({
                 index: ['pedidos', 'interacoes', 'anexos'],
                 type: 'data',
-                from: from, 
-                size : config.itensPerPage,
+                from: from,
+                size: config.itensPerPage,
                 body: {
-                    query : query,
-                    highlight : {
-                        fields : {
-                            "anexos_conteudo_arquivo" : { "fragment_size" : config.highlightStringSize, "number_of_fragments" : 3 },
-                            "interacoes_descricao_local" : { "fragment_size" : config.highlightStringSize, "number_of_fragments" : 3 },
-                            "pedidos_titulo_local": { "fragment_size" : config.highlightStringSize, "number_of_fragments" : 3 },
-                            "pedidos_descricao_local": { "fragment_size" : config.highlightStringSize, "number_of_fragments" : 3 }
+                    query: query,
+                    highlight: {
+                        fields: {
+                            "anexos_conteudo_arquivo": { "fragment_size": config.highlightStringSize, "number_of_fragments": 3 },
+                            "interacoes_descricao_local": { "fragment_size": config.highlightStringSize, "number_of_fragments": 3 },
+                            "pedidos_titulo_local": { "fragment_size": config.highlightStringSize, "number_of_fragments": 3 },
+                            "pedidos_descricao_local": { "fragment_size": config.highlightStringSize, "number_of_fragments": 3 }
                         }
                     }
                 }
-            }, function (error, response) {
+            }, function(error, response) {
                 if (error) return callback(error);
                 return callback(null, response);
             });
@@ -216,28 +225,28 @@
                 index: ['pedidos', 'interacoes', 'anexos'],
                 type: 'data',
                 from: from,
-                size : config.itensPerPage,
+                size: config.itensPerPage,
                 body: {
-                    query : {
-                        bool : {
-                            should : [
-                                { match: { "anexos_conteudo_arquivo" : value } },
-                                { match: { "interacoes_descricao_local" : value } },
-                                { match: { "pedidos_titulo_local" : value } },
-                                { match: { "pedidos_descricao_local" : value } }
+                    query: {
+                        bool: {
+                            should: [
+                                { match: { "anexos_conteudo_arquivo": value } },
+                                { match: { "interacoes_descricao_local": value } },
+                                { match: { "pedidos_titulo_local": value } },
+                                { match: { "pedidos_descricao_local": value } }
                             ]
                         }
                     },
-                    highlight : {
-                        fields : {
-                            "anexos_conteudo_arquivo" : { "fragment_size" : config.highlightStringSize, "number_of_fragments" : 3 },
-                            "interacoes_descricao_local" : { "fragment_size" : config.highlightStringSize, "number_of_fragments" : 3 },
-                            "pedidos_titulo_local": { "fragment_size" : config.highlightStringSize, "number_of_fragments" : 3 },
-                            "pedidos_descricao_local": { "fragment_size" : config.highlightStringSize, "number_of_fragments" : 3 }
+                    highlight: {
+                        fields: {
+                            "anexos_conteudo_arquivo": { "fragment_size": config.highlightStringSize, "number_of_fragments": 3 },
+                            "interacoes_descricao_local": { "fragment_size": config.highlightStringSize, "number_of_fragments": 3 },
+                            "pedidos_titulo_local": { "fragment_size": config.highlightStringSize, "number_of_fragments": 3 },
+                            "pedidos_descricao_local": { "fragment_size": config.highlightStringSize, "number_of_fragments": 3 }
                         }
                     }
                 }
-            }, function (error, response) {
+            }, function(error, response) {
                 if (error) return callback(error);
                 return callback(null, response);
             });
@@ -256,14 +265,14 @@
 
             var finalValue = data.value.replace(/˜/g, '~').replace(/ˆ/g, '^')
 
-// console.log(finalValue)
+            // console.log(finalValue)
 
             var qsP = {
                 bool: {
                     must: []
                 }
             };
-            
+
 
             var qsI = {
                 bool: {
@@ -278,9 +287,9 @@
             };
 
             if (finalValue) {
-                qsP.bool.must.push( { query_string : { fields: [ 'pedidos_titulo_local', 'pedidos_descricao_local' ], query : finalValue } } );
-                qsI.bool.must.push( { query_string : { fields: [ 'interacoes_descricao_local' ], query : finalValue } } );
-                qsA.bool.must.push( { query_string : { fields: [ 'anexos_conteudo_arquivo' ], query : finalValue } } );
+                qsP.bool.must.push({ query_string: { fields: ['pedidos_titulo_local', 'pedidos_descricao_local'], query: finalValue } });
+                qsI.bool.must.push({ query_string: { fields: ['interacoes_descricao_local'], query: finalValue } });
+                qsA.bool.must.push({ query_string: { fields: ['anexos_conteudo_arquivo'], query: finalValue } });
             }
 
             if (data.enviadoPara.length > 0) {
@@ -292,9 +301,9 @@
                 })
 
                 // console.log(enviadoPara)
-                qsP.bool.must.push( { query_string : { fields : ['agentes_nome_local'], query : enviadoPara } } );
-                qsI.bool.must.push( { query_string : { fields : ['agentes_nome'], query : enviadoPara } } );
-                qsA.bool.must.push( { query_string : { fields : ['agentes_nome'], query : enviadoPara } } );
+                qsP.bool.must.push({ query_string: { fields: ['agentes_nome_local'], query: enviadoPara } });
+                qsI.bool.must.push({ query_string: { fields: ['agentes_nome'], query: enviadoPara } });
+                qsA.bool.must.push({ query_string: { fields: ['agentes_nome'], query: enviadoPara } });
 
             }
 
@@ -302,22 +311,22 @@
 
                 var por = '"' + data.por.replace(/˜/g, '~').replace(/ˆ/g, '^') + '"'
 
-                qsP.bool.must.push( { query_string : { fields : ['usuarios_nome_local'], query : por } } );
-                qsI.bool.must.push( { query_string : { fields : ['usuarios_nome'], query : por } } );
-                qsA.bool.must.push( { query_string : { fields : ['usuarios_nome'], query : por } } );
+                qsP.bool.must.push({ query_string: { fields: ['usuarios_nome_local'], query: por } });
+                qsI.bool.must.push({ query_string: { fields: ['usuarios_nome'], query: por } });
+                qsA.bool.must.push({ query_string: { fields: ['usuarios_nome'], query: por } });
 
             }
 
             if (data.dataDe && data.dataAte) {
 
-                qsP.bool.must.push( { range: { "pedidos_data_envio_local" : { "gte" : data.dataDe }}} );
-                qsP.bool.must.push( { range: { "pedidos_data_envio_local" : { "lt" : data.dataAte }}} );
-                
-                qsI.bool.must.push( { range: { "pedidos_data_envio" : { "gte" : data.dataDe }}} );
-                qsI.bool.must.push( { range: { "pedidos_data_envio" : { "lt" : data.dataAte }}} );
-                
-                qsA.bool.must.push( { range: { "pedidos_data_envio" : { "gte" : data.dataDe }}} );
-                qsA.bool.must.push( { range: { "pedidos_data_envio" : { "lt" : data.dataAte }}} );
+                qsP.bool.must.push({ range: { "pedidos_data_envio_local": { "gte": data.dataDe } } });
+                qsP.bool.must.push({ range: { "pedidos_data_envio_local": { "lt": data.dataAte } } });
+
+                qsI.bool.must.push({ range: { "pedidos_data_envio": { "gte": data.dataDe } } });
+                qsI.bool.must.push({ range: { "pedidos_data_envio": { "lt": data.dataAte } } });
+
+                qsA.bool.must.push({ range: { "pedidos_data_envio": { "gte": data.dataDe } } });
+                qsA.bool.must.push({ range: { "pedidos_data_envio": { "lt": data.dataAte } } });
             }
 
             var tipo_pedido_situacao = [];
@@ -328,21 +337,21 @@
 
             if (data.chkEmTramitacao == 'true') {
                 tipo_pedido_situacao.push(1);
-            } 
+            }
             if (data.chkFinalizada == 'true') {
                 tipo_pedido_situacao.push(2);
-            } 
+            }
 
             //2017-10-02 Paulo Campos: Adicionado filtro 
             if (data.chkNaoObteveResposta == 'true') {
                 tipo_pedido_situacao.push(3);
-            } 
-
-            if (data.chkPedidosRecursoSim == 'true' ) {
-                tipo_pedido_resposta = [4,5,6,7,8,9,10,11];
             }
-            if (data.chkPedidosRecursoNao == 'true' ) {
-                tipo_pedido_resposta = [1,2,3];
+
+            if (data.chkPedidosRecursoSim == 'true') {
+                tipo_pedido_resposta = [4, 5, 6, 7, 8, 9, 10, 11];
+            }
+            if (data.chkPedidosRecursoNao == 'true') {
+                tipo_pedido_resposta = [1, 2, 3];
             }
 
             if (data.chkAtendido == 'true') {
@@ -379,33 +388,33 @@
             }
 
             if (tipo_pedido_situacao.length > 0) {
-                qsP.bool.must.push( { terms : { tipo_pedido_situacao_codigo_local : tipo_pedido_situacao } } );
-                qsI.bool.must.push( { terms : { tipo_pedido_situacao_codigo : tipo_pedido_situacao } } );
-                qsA.bool.must.push( { terms : { tipo_pedido_situacao_codigo : tipo_pedido_situacao } } );
+                qsP.bool.must.push({ terms: { tipo_pedido_situacao_codigo_local: tipo_pedido_situacao } });
+                qsI.bool.must.push({ terms: { tipo_pedido_situacao_codigo: tipo_pedido_situacao } });
+                qsA.bool.must.push({ terms: { tipo_pedido_situacao_codigo: tipo_pedido_situacao } });
             }
 
             if (tipo_pedido_resposta.length > 0) {
-                qsP.bool.must.push( { terms : { tipo_pedidos_resposta_codigo : tipo_pedido_resposta } } );
-                qsI.bool.must.push( { terms : { tipo_pedidos_resposta_codigo_local : tipo_pedido_resposta } } );
-                qsA.bool.must.push( { terms : { tipo_pedidos_resposta_codigo : tipo_pedido_resposta } } );
+                qsP.bool.must.push({ terms: { tipo_pedidos_resposta_codigo: tipo_pedido_resposta } });
+                qsI.bool.must.push({ terms: { tipo_pedidos_resposta_codigo_local: tipo_pedido_resposta } });
+                qsA.bool.must.push({ terms: { tipo_pedidos_resposta_codigo: tipo_pedido_resposta } });
             }
 
             if (status_pedido.length > 0) {
-                qsP.bool.must.push( { terms : { status_pedido_codigo_local : status_pedido } } );
-                qsI.bool.must.push( { terms : { status_pedido_codigo : status_pedido } } );
-                qsA.bool.must.push( { terms : { status_pedido_codigo : status_pedido } } );
+                qsP.bool.must.push({ terms: { status_pedido_codigo_local: status_pedido } });
+                qsI.bool.must.push({ terms: { status_pedido_codigo: status_pedido } });
+                qsA.bool.must.push({ terms: { status_pedido_codigo: status_pedido } });
             }
 
             if (tipo_nivel_federativo.length > 0) {
-                qsP.bool.must.push( { terms : { tipo_nivel_federativo_codigo_local : tipo_nivel_federativo } } );
-                qsI.bool.must.push( { terms : { tipo_nivel_federativo_codigo : tipo_nivel_federativo } } );
-                qsA.bool.must.push( { terms : { tipo_nivel_federativo_codigo : tipo_nivel_federativo } } );
+                qsP.bool.must.push({ terms: { tipo_nivel_federativo_codigo_local: tipo_nivel_federativo } });
+                qsI.bool.must.push({ terms: { tipo_nivel_federativo_codigo: tipo_nivel_federativo } });
+                qsA.bool.must.push({ terms: { tipo_nivel_federativo_codigo: tipo_nivel_federativo } });
             }
 
             if (tipo_poder.length > 0) {
-                qsP.bool.must.push( { terms : { tipo_poder_codigo_local : tipo_poder } } );
-                qsI.bool.must.push( { terms : { tipo_poder_codigo : tipo_poder } } );
-                qsA.bool.must.push( { terms : { tipo_poder_codigo : tipo_poder } } );
+                qsP.bool.must.push({ terms: { tipo_poder_codigo_local: tipo_poder } });
+                qsI.bool.must.push({ terms: { tipo_poder_codigo: tipo_poder } });
+                qsA.bool.must.push({ terms: { tipo_poder_codigo: tipo_poder } });
             }
 
             query.bool.should.push(qsP);
@@ -413,35 +422,34 @@
             query.bool.should.push(qsA);
 
             var order = {};
-            if (data.scope_search.length == 1 && data.scope_search[0] == 'pedidos'){
-                order = { "pedidos_codigo_local":   { "order": "desc" }}
+            if (data.scope_search.length == 1 && data.scope_search[0] == 'pedidos') {
+                order = { "pedidos_codigo_local": { "order": "desc" } }
             }
 
             client.search({
                 index: data.scope_search,
                 type: 'data',
-                from: from, 
-                size : config.itensPerPage,
+                from: from,
+                size: config.itensPerPage,
                 body: {
-                    query : query,
+                    query: query,
                     sort: order,
-                    highlight : {
-                        fields : {
-                            "anexos_conteudo_arquivo" : { "fragment_size" : config.highlightStringSize, "number_of_fragments" : 3 },
-                            "interacoes_descricao_local" : { "fragment_size" : config.highlightStringSize, "number_of_fragments" : 3 },
-                            "pedidos_titulo_local": { "fragment_size" : config.highlightStringSize, "number_of_fragments" : 3 },
-                            "pedidos_descricao_local": { "fragment_size" : config.highlightStringSize, "number_of_fragments" : 3 }
+                    highlight: {
+                        fields: {
+                            "anexos_conteudo_arquivo": { "fragment_size": config.highlightStringSize, "number_of_fragments": 3 },
+                            "interacoes_descricao_local": { "fragment_size": config.highlightStringSize, "number_of_fragments": 3 },
+                            "pedidos_titulo_local": { "fragment_size": config.highlightStringSize, "number_of_fragments": 3 },
+                            "pedidos_descricao_local": { "fragment_size": config.highlightStringSize, "number_of_fragments": 3 }
                         }
                     }
                 }
-            }, function (error, response) {
+            }, function(error, response) {
                 if (error) return callback(error);
                 return callback(null, response);
             });
 
         }
 
-    } 
+    }
 
 })();
-
