@@ -22,7 +22,7 @@
         router.route('/busca-avancada/')
             .post(commonController.buscaAvancada);
 
-        router.route('/forceMerge/')
+        router.route('/utils/forceMerge')
             .get(commonController.forceMerge);
 
         app.use('/api', router);
