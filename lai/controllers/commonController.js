@@ -292,7 +292,7 @@
                     console.log(err);
                     return res.status(err.status).send({ "success": false, message: err.message });
                 } else {
-                    return callback(null, result);
+                    return res.status(err.status).send({ "success": true, message: 'Merged!' });
                 }
 
             });
