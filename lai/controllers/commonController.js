@@ -287,15 +287,14 @@
 
         forceMerge: function(req, res, next) {
             common.forceMerge(function(err, result) {
-
                 if (err) {
                     console.log(err);
                     return res.status(err.status).send({ "success": false, message: err.message });
                 } else {
-                    return res.status(err.status).send({ "success": true, message: 'Merged!' });
+                    return res.send({ "success": true, message: 'Merged!' });
                 }
 
-            });
+            }.bind(res));
         },
 
 
