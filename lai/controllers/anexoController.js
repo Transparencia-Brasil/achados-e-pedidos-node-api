@@ -108,16 +108,23 @@ const { assetsFolder } = require('../config.js');
                 });
             } 
 
+            var anexoModel = anexo;            
             var a = anexoService.preencheModel(codigo, req.body);
+            anexo.consultarPorId(codigo, function (err, result) {
 
-            anexo.gravar(a, function (err, result) {   
-                if (err) {
-                    return res.status(err.status).send({"result": "error", message: err.message});
-                } else {
-                    return res.json({"success": true});
+                if (!err) {
+                    a.anexos_conteudo_arquivo = result._source.anexos_conteudo_arquivo;
+                    a.anexos_arquivo = result._source.anexos_arquivo;
                 }
-            });
 
+                anexoModel.gravar(a, function (errb, resultb) {   
+                    if (errb) {
+                        return res.status(errb.status).send({"result": "error", message: errb.message});
+                    } else {
+                        return res.json({"success": true});
+                    }
+                });
+            });            
         },
 
         apagar: function(req, res, next) {
